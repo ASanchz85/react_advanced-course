@@ -78,6 +78,7 @@ RTFM to have it working 💪.
 
 The project has the minimal vite dependencies by default. Together with:
 
+- SupabaseJS
 - React-router-dom
 - Date-fns
 - React-icons
@@ -87,6 +88,18 @@ The project has the minimal vite dependencies by default. Together with:
 As this is a small project, I've decided to use Supabase (a postgreSQL cloud provided) similar to Firebase as a backend and database. Although it has some built-in functionalities to hide most of the vulnarabilities when consuming this kind of servicies from the client-side. You should discard this idea if you want to achieve scalability and fully protection.
 
 For a small-medium project is a good option, but if you want to go ahead, consider having an extra layer of protection using a CDN provided by Cloudfare, for example. [Studying its security layer is a must](https://supabase.com/docs/guides/database/postgres/row-level-security).
+
+### Supabase config
+
+First of all, you need to create an account in [Supabase](https://supabase.com/). Then, you can create a new project using Supabase free tier. You'll be prompted to set an organization name, project name, password for your database, and server location.
+
+After that, you're ready to install the npm Supabase package in your project. Once installed and both, Supabase URL and anonKey are saved within your .env file, you can create your SQL table using two different methods. On the one hand, you have the chance of using PostgreeSQL as a spreadsheet document thanks to "Table Editor" built-in Supabase feature. While, on the other hand, you can type directly a SQL command.
+
+Once your first table is created, you'll be able to see an ApiDocs tab at right top corner in which almost all possible (the most important ones, at least) are provided for JS language.
+
+Be aware that before trying to stablish a connection between your serverless backend provided by Supabase and your client, you'll need to create the RLS policies to manage auth processes.
+
+After defining RLS, it's time to choose one or several providers to manage authentication (0Auth). Supabase provides with multiple options and good documentatios to carry it out. RTFM.
 
 ## Execution commands
 

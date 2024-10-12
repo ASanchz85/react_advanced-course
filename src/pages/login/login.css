@@ -1,0 +1,17 @@
+.login__container {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+}
+
+.logo {
+  height: 25rem;
+  width: auto;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.isHover,
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}

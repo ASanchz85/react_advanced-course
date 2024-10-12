@@ -1,51 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import { RouterProvider } from 'react-router-dom'
+import Login from './pages/login/Login'
+import supabase from './shared/services/supabaseClient'
+import mainRouting from './shared/routes/mainRouting'
+import type { Session } from '@supabase/supabase-js'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [session, setSession] = useState<Session | null>(null)
 
-  return (
-    <>
-      <div>
-        <a
-          href='https://vitejs.dev'
-          target='_blank'
-          rel='noreferrer'
-        >
-          <img
-            src={viteLogo}
-            className='logo'
-            alt='Vite logo'
-          />
-        </a>
-        <a
-          href='https://react.dev'
-          target='_blank'
-          rel='noreferrer'
-        >
-          <img
-            src={reactLogo}
-            className='logo react'
-            alt='React logo'
-          />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  const getSession = async () => {
+    const { data } = await supabase.auth.getSession()
+
+    if (data) {
+      setSession(data.session)
+    }
+  }
+
+  useEffect(() => {
+    getSession()
+  }, [])
+
+  return <>{session ? <RouterProvider router={mainRouting} /> : <Login />}</>
 }
 
 export default App
