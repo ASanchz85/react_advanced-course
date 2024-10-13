@@ -1,16 +1,10 @@
 import { FaArrowAltCircleLeft } from 'react-icons/fa'
 import supabase from '../../../../shared/services/supabaseClient'
 import Avatar from '../../../../shared/components/avatar/Avatar'
+import type { ChatUser } from '../../../../pages/chatRoom/ChatRoom'
 
 interface HeaderProps {
-  userData: {
-    user: {
-      user_metadata: {
-        avatar_url: string
-        full_name: string
-      }
-    }
-  }
+  userData: ChatUser
 }
 
 function Header({ userData }: HeaderProps) {
@@ -43,7 +37,7 @@ function Header({ userData }: HeaderProps) {
         <FaArrowAltCircleLeft style={{ height: '30px', width: '30px' }} />
       </span>
       <h1>N-Chat</h1>
-      {userData && <Avatar userMetadata={userData.user.user_metadata} />}
+      <Avatar userMetadata={userData.user_metadata} />
     </header>
   )
 }

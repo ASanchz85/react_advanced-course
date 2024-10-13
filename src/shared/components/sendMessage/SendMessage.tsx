@@ -1,17 +1,32 @@
 import { FormEvent, useState } from 'react'
 import { TbSend2 } from 'react-icons/tb'
+import supabase from '../../services/supabaseClient'
+import type { ChatUser } from '../../../pages/chatRoom/ChatRoom'
 
-function SendMessage() {
+interface SendMessageProps {
+  userData: ChatUser
+}
+
+function SendMessage({ userData }: SendMessageProps) {
   const [newMessage, setNewMessage] = useState('')
 
-  const handleSendMessage = (e: FormEvent<HTMLFormElement>) => {
+  const handleSendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!newMessage.trim()) {
       return
     }
 
-    console.log('Message Sent:', newMessage)
+    const insertMessage = await supabase.from('messages').insert({
+      content: newMessage,
+      email: userData.user_metadata.email
+    })
+
+    if (insertMessage.error) {
+      console.error('Error inserting message:', insertMessage.error.message)
+      return
+    }
+
     setNewMessage('')
   }
 
