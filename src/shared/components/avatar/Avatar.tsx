@@ -7,6 +7,8 @@ interface AvatarProps {
 }
 
 function Avatar({ userMetadata }: AvatarProps) {
+  console.log('Avatar-userMetadata', userMetadata)
+
   return (
     <div
       className='avatar'

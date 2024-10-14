@@ -57,6 +57,7 @@ export default [
       'no-loop-func': 'error',
       'function-paren-newline': ['error', 'consistent'],
 
+      // Custom rules
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off'
     }
