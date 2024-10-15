@@ -58,8 +58,7 @@ export default [
       'function-paren-newline': ['error', 'consistent'],
 
       // Custom rules
-      'react/react-in-jsx-scope': 'off',
-      '@typescript-eslint/explicit-function-return-type': 'off'
+      'react/react-in-jsx-scope': 'off'
     }
   }
 ]

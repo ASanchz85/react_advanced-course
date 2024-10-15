@@ -9,10 +9,21 @@ function Login() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google'
     })
+
+    console.log(data, error)
   }
 
   return (
-    <section className='login__container'>
+    <section
+      className='login__container'
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        placeContent: 'center',
+        height: '100vh',
+        gap: '3rem'
+      }}
+    >
       <img
         className={onLoginOver ? 'logo isHover' : 'logo'}
         src='/Nchat_logo.png'

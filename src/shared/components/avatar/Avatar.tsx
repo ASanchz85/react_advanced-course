@@ -7,8 +7,6 @@ interface AvatarProps {
 }
 
 function Avatar({ userMetadata }: AvatarProps) {
-  console.log('Avatar-userMetadata', userMetadata)
-
   return (
     <div
       className='avatar'
@@ -26,6 +24,9 @@ function Avatar({ userMetadata }: AvatarProps) {
             src={userMetadata.avatar_url}
             alt={userMetadata.full_name}
             className='avatar__image'
+            onError={(e) => {
+              e.currentTarget.src = 'profile_fallback.png'
+            }}
             style={{ width: '75px', height: '75px', borderRadius: '50%' }}
           />
           <p

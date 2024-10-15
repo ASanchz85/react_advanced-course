@@ -1,6 +1,6 @@
 # React Advanced Course + TypeScript + Vite
 
-This is the technical coding example to get the React Advanced certificate.
+This is the technical coding example to get the React Advanced certificate (15-10-2024).
 
 The project has been set up using vite, typescript + swc and a custom eslint config file that follows the standardjs convention. You are free to change it and use whatever other rules you like more. You can take a look at them here:
 
@@ -83,6 +83,15 @@ The project has the minimal vite dependencies by default. Together with:
 - Date-fns
 - React-icons
 
+## Environment variables
+
+Apart from the clasic .env file, Vite provides with two different kind of environments. ".env.development" and ".env.production" that automatically are selected when typing the command build or dev in your terminal. For doing this project, you'll need basically to type down two variables in your .env file (both of them provided by Supabase when starting your project settings):
+
+```sh
+VITE_API_SUPABASE_URL=XXXX
+VITE_API_SUPABASE_KEY=XXXX
+```
+
 ## Serverless Supabase backend and recommendations
 
 As this is a small project, I've decided to use Supabase (a postgreSQL cloud provided) similar to Firebase as a backend and database. Although it has some built-in functionalities to hide most of the vulnarabilities when consuming this kind of servicies from the client-side. You should discard this idea if you want to achieve scalability and fully protection.
@@ -100,6 +109,12 @@ Once your first table is created, you'll be able to see an ApiDocs tab at right 
 Be aware that before trying to stablish a connection between your serverless backend provided by Supabase and your client, you'll need to create the RLS policies to manage auth processes.
 
 After defining RLS, it's time to choose one or several providers to manage authentication (0Auth). Supabase provides with multiple options and good documentatios to carry it out. RTFM.
+
+### Googles Developer Console
+
+[Google Cloud Console](https://console.cloud.google.com/) is my personal choice as provider for doing the login (SSO, single sign on). There are [plenty of providers](https://supabase.com/docs/guides/auth/social-login) you can use with Supabase that gives you "social login - 0auth". So,while going through Supabase website you'll figure out that it's really easy to start using them thanks to the amount of links to documentation with examples of usage. The response object and the meta-data that each provider sends you back could vary a little bit, but most of them use the same principles.
+
+Regarding Google Cloud Console, the process to get your account enabled and ready for this project, it's quite straight forward. Let me give you a quick recap just as a guidance.
 
 ## Execution commands
 
