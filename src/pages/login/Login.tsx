@@ -14,16 +14,7 @@ function Login() {
   }
 
   return (
-    <section
-      className='login__container'
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        placeContent: 'center',
-        height: '100vh',
-        gap: '3rem'
-      }}
-    >
+    <section className='login__container'>
       <img
         className={onLoginOver ? 'logo isHover' : 'logo'}
         src='/Nchat_logo.png'

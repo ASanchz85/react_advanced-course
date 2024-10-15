@@ -1,25 +1,12 @@
-interface AvatarProps {
-  userMetadata: {
-    avatar_url: string
-    full_name: string
-    email: string
-  }
-}
+import { emailParser } from '../../utils/stringHandler'
+import type { UserChatMetadata } from '../../types/user'
+import './avatar.css'
 
-function Avatar({ userMetadata }: AvatarProps) {
+function Avatar({ userMetadata }: { userMetadata: UserChatMetadata }) {
   return (
-    <div
-      className='avatar'
-      style={{
-        padding: '1rem',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
+    <>
       {userMetadata && (
-        <div>
+        <div className='avatar__container'>
           <img
             src={userMetadata.avatar_url}
             alt={userMetadata.full_name}
@@ -27,17 +14,14 @@ function Avatar({ userMetadata }: AvatarProps) {
             onError={(e) => {
               e.currentTarget.src = 'profile_fallback.png'
             }}
-            style={{ width: '75px', height: '75px', borderRadius: '50%' }}
           />
-          <p
-            className='avatar__name'
-            style={{ textAlign: 'center' }}
-          >
-            {userMetadata.full_name}
-          </p>
+          <div className='avatar__details'>
+            <p>{emailParser(userMetadata.email)}</p>
+            <p>online</p>
+          </div>
         </div>
       )}
-    </div>
+    </>
   )
 }
 

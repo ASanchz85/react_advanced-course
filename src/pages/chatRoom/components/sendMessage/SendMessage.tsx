@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react'
 import { TbSend2 } from 'react-icons/tb'
-import supabase from '../../services/supabaseClient'
-import type { ChatUser } from '../../../pages/chatRoom/ChatRoom'
+import supabase from '../../../../shared/services/supabaseClient'
+import type { ChatUser } from '../../../../shared/types/user'
 
 interface SendMessageProps {
   userData: ChatUser
