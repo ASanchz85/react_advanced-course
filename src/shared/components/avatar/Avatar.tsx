@@ -8,7 +8,7 @@ function Avatar({ userMetadata }: { userMetadata: UserChatMetadata }) {
       {userMetadata && (
         <div className='avatar__container'>
           <img
-            src={userMetadata.avatar_url}
+            src={userMetadata.avatar_url ?? '/profile_fallback.png'}
             alt={userMetadata.full_name}
             className='avatar__image'
             onError={(e) => {

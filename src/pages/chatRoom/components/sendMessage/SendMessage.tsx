@@ -31,28 +31,18 @@ function SendMessage({ userData }: SendMessageProps) {
   }
 
   return (
-    <section className='send__message'>
-      <form
-        onSubmit={handleSendMessage}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          width: '100%'
-        }}
-      >
+    <section className='send__message_input__container'>
+      <form onSubmit={handleSendMessage}>
         <input
           type='text'
           placeholder='Type a message...'
           className='send__message__input'
-          style={{ width: '100%' }}
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
         />
         <button
           type='submit'
           className='send__message__button'
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
         >
           Send
           <TbSend2 />

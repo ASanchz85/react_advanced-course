@@ -3,6 +3,7 @@ import { RoomDetails, MessagesCard, SendMessage } from './components'
 import supabase from '../../shared/services/supabaseClient'
 import {
   TABLE_REALTIME_EVENTS,
+  TABLE_SCHEMA,
   TABLE_SQL_NAMES,
   TABLE_SQL_QUERIES
 } from '../../shared/config/constants'
@@ -59,13 +60,13 @@ function ChatRoom() {
 
   useEffect(() => {
     const channel = supabase
-      .channel(TABLE_SQL_QUERIES.SELECT_ALL)
+      .channel('*')
       .on(
         TABLE_REALTIME_EVENTS.POSTGRES_CHANGES,
         {
           event: TABLE_SQL_QUERIES.INSERT,
-          schema: 'public',
-          table: 'messages'
+          schema: TABLE_SCHEMA.PUBLIC,
+          table: TABLE_SQL_NAMES.MESSAGES
         },
         (payload: { new: Message }) => {
           const newMessage = payload.new
@@ -85,7 +86,6 @@ function ChatRoom() {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
-
   return (
     <section className='chat__room__container'>
       {userInfo && (
@@ -93,14 +93,15 @@ function ChatRoom() {
           <RoomDetails userData={userInfo} />
           {messages && (
             <div className='messages__container'>
-              <MessagesCard
-                messages={messages}
-                activeUser={activeUser}
-              />
-              <div ref={scrollRef}></div>
+              <div className='messages__content'>
+                <MessagesCard
+                  messages={messages}
+                  activeUser={activeUser}
+                />
+                <div ref={scrollRef}></div>
+              </div>
             </div>
           )}
-
           <SendMessage userData={userInfo} />
         </>
       )}

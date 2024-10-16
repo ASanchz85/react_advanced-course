@@ -4,10 +4,14 @@ export const TABLE_SQL_NAMES = {
 }
 
 export const TABLE_SQL_QUERIES = {
-  SELECT_ALL: '*',
-  INSERT: 'INSERT'
+  SELECT_ALL: '*' as const,
+  INSERT: 'INSERT' as const
 }
 
 export const TABLE_REALTIME_EVENTS = {
-  POSTGRES_CHANGES: 'postgres_changes'
+  POSTGRES_CHANGES: 'postgres_changes' as const
+}
+
+export const TABLE_SCHEMA = {
+  PUBLIC: 'public' as const
 }

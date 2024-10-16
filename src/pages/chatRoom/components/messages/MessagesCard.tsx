@@ -1,5 +1,8 @@
-import { formatDateHumanReadable } from '../../../../shared/utils/dateHandler'
+import { emailParser } from '../../../../shared/utils/stringHandler'
+// import { getTimePassed } from '../../../../shared/utils/dateHandler'
 import type { Message } from '../../../../shared/types/messages'
+import './messagesCard.css'
+import { getHourFromDate } from '../../../../shared/utils/dateHandler'
 
 interface MessagesCardProps {
   messages: Message[]
@@ -17,9 +20,15 @@ function MessagesCard({ messages, activeUser }: MessagesCardProps) {
               activeUser === message.email ? 'sent' : 'received'
             }`}
           >
+            <p>{emailParser(message.email)}</p>
             <p>{message.content}</p>
-            <p>{message.email}</p>
-            <p>{formatDateHumanReadable(message.created_at)}</p>
+            <span
+              className={`single__message-hour ${
+                activeUser === message.email ? 'sent' : 'received'
+              }`}
+            >
+              at {getHourFromDate(message.created_at)}
+            </span>
           </div>
         ))}
     </>
