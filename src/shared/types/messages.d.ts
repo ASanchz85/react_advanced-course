@@ -1,6 +1,7 @@
 export interface Message {
   id: number
   content: string
-  email: string
+  email_sender: string
+  email_receiver: string | null
   created_at: string
 }

@@ -16,10 +16,18 @@ function ChatRoom() {
   const [messages, setMessages] = useState<Message[]>([])
   const [activeUser, setActiveUser] = useState('')
 
+  //? private chat
+  const [filteredMessages, setFilteredMessages] = useState<Message[]>([])
+  const [allUsers, setAllUsers] = useState<string[]>([])
+  const [selectedUser, setSelectedUser] = useState<string | null>(null)
+
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const getSession = async () => {
     const { data } = await supabase.auth.getSession()
+
+    //!
+    console.log('getSession-data:', data)
 
     if (data?.session?.user?.user_metadata) {
       const { avatar_url, full_name, email } = data.session.user.user_metadata
@@ -43,10 +51,36 @@ function ChatRoom() {
       }
 
       setMessages(data)
+
+      const uniqueUsers = Array.from(
+        new Set(data.map((message: Message) => message.email_sender))
+      )
+      setAllUsers(uniqueUsers)
+
+      //!
+      console.log('getSession-uniqueUsers:', uniqueUsers)
     } catch (error) {
       if (error instanceof Error) {
         console.error('Error fetching messages:', error.message)
       }
+    }
+  }
+
+  const filterMessages = () => {
+    if (selectedUser) {
+      const privateMessages = messages.filter(
+        (message) =>
+          (message.email_sender === activeUser &&
+            message.email_receiver === selectedUser) ||
+          (message.email_sender === selectedUser &&
+            message.email_receiver === activeUser)
+      )
+      setFilteredMessages(privateMessages)
+    } else {
+      const globalMessages = messages.filter(
+        (message) => message.email_receiver === null
+      )
+      setFilteredMessages(globalMessages)
     }
   }
 
@@ -86,26 +120,69 @@ function ChatRoom() {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
+
   return (
     <section className='chat__room__container'>
       {userInfo && (
         <>
           <RoomDetails userData={userInfo} />
-          {messages && (
+          {/* User Selector for Private Chat */}
+          <div>
+            <select
+              onChange={(e) => setSelectedUser(e.target.value)}
+              value={selectedUser || ''}
+            >
+              <option value=''>Global Chat</option>
+              {allUsers
+                .filter((email) => email !== activeUser)
+                .map((email) => (
+                  <option
+                    key={email}
+                    value={email}
+                  >
+                    {email}
+                  </option>
+                ))}
+            </select>
+          </div>
+          {filteredMessages && (
             <div className='messages__container'>
               <div className='messages__content'>
                 <MessagesCard
-                  messages={messages}
+                  messages={filteredMessages}
                   activeUser={activeUser}
                 />
                 <div ref={scrollRef}></div>
               </div>
             </div>
           )}
-          <SendMessage userData={userInfo} />
+          <SendMessage
+            userData={userInfo}
+            selectedUser={selectedUser}
+          />{' '}
+          {/* Pass selectedUser */}
         </>
       )}
     </section>
+    // <section className='chat__room__container'>
+    //   {userInfo && (
+    //     <>
+    //       <RoomDetails userData={userInfo} />
+    //       {messages && (
+    //         <div className='messages__container'>
+    //           <div className='messages__content'>
+    //             <MessagesCard
+    //               messages={messages}
+    //               activeUser={activeUser}
+    //             />
+    //             <div ref={scrollRef}></div>
+    //           </div>
+    //         </div>
+    //       )}
+    //       <SendMessage userData={userInfo} />
+    //     </>
+    //   )}
+    // </section>
   )
 }
 
