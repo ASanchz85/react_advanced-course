@@ -4,5 +4,6 @@ export function formatDateHumanReadable(dateString: string): string {
 }
 
 export const getHourFromDate = (date: string) => {
-  return formatDateHumanReadable(date).split(' ')[1]
+  const completeHour = formatDateHumanReadable(date).split(' ')[1]
+  return completeHour.slice(0, 5)
 }

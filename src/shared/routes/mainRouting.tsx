@@ -13,9 +13,13 @@ const routes = createRoutesFromElements(
       element={<Layout />}
     >
       <Route
-        index
+        path='/global-chat'
         element={<ChatRoom />}
       />
+      {/* <Route
+        path='chat/:activeUser/:targetUser'
+        element={<ChatRoom />}
+      /> */}
       <Route
         path='profile'
         element={<Profile />}

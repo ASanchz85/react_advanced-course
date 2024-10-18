@@ -1,132 +1,173 @@
 import { useEffect, useRef, useState } from 'react'
 import { RoomDetails, MessagesCard, SendMessage } from './components'
-import supabase from '../../shared/services/supabaseClient'
-import {
-  TABLE_REALTIME_EVENTS,
-  TABLE_SCHEMA,
-  TABLE_SQL_NAMES,
-  TABLE_SQL_QUERIES
-} from '../../shared/config/constants'
-import type { Message } from '../../shared/types/messages'
-import type { ChatUser } from '../../shared/types/user'
 import './chatRoom.css'
+import {
+  useGlobalMessages,
+  usePrivateMessages,
+  useSession
+} from '../../shared/hooks'
+import supabase from '../../shared/services/supabaseClient'
 
 function ChatRoom() {
-  const [userInfo, setUserInfo] = useState<ChatUser | null>(null)
-  const [messages, setMessages] = useState<Message[]>([])
-  const [activeUser, setActiveUser] = useState('')
-
-  //? private chat
-  const [filteredMessages, setFilteredMessages] = useState<Message[]>([])
-  const [allUsers, setAllUsers] = useState<string[]>([])
   const [selectedUser, setSelectedUser] = useState<string | null>(null)
+  const { userInfo, activeUser } = useSession()
+  const { messages } = useGlobalMessages()
+  const { filteredMessages, allUsers } = usePrivateMessages({
+    messages,
+    activeUser,
+    selectedUser
+  })
 
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  const getSession = async () => {
-    const { data } = await supabase.auth.getSession()
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, filteredMessages])
 
-    //!
-    console.log('getSession-data:', data)
+  //! check online users
+  const [onlineUsers, setOnlineUsers] = useState<{ user_email: string }[]>([])
 
-    if (data?.session?.user?.user_metadata) {
-      const { avatar_url, full_name, email } = data.session.user.user_metadata
+  const getOnlineUsers = async () => {
+    const { data, error } = await supabase
+      .from('online_users')
+      .select('user_email')
+      .eq('status', 'online')
 
-      setUserInfo({ user_metadata: { avatar_url, full_name, email } })
+    if (error) {
+      console.error('Error fetching online users:', error.message)
+      return []
     }
 
-    if (data?.session?.user?.email) {
-      setActiveUser(data?.session?.user?.email)
-    }
+    return data || []
   }
 
-  const getMessages = async () => {
-    try {
-      const { data, error } = await supabase
-        .from(TABLE_SQL_NAMES.MESSAGES)
-        .select(TABLE_SQL_QUERIES.SELECT_ALL)
+  const trackUserPresence = async () => {
+    // Get the current session
+    const {
+      data: { session },
+      error
+    } = await supabase.auth.getSession()
 
-      if (error) {
-        throw error
-      }
-
-      setMessages(data)
-
-      const uniqueUsers = Array.from(
-        new Set(data.map((message: Message) => message.email_sender))
-      )
-      setAllUsers(uniqueUsers)
-
-      //!
-      console.log('getSession-uniqueUsers:', uniqueUsers)
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error('Error fetching messages:', error.message)
-      }
+    if (error) {
+      console.error('Error getting session:', error.message)
+      return
     }
-  }
 
-  const filterMessages = () => {
-    if (selectedUser) {
-      const privateMessages = messages.filter(
-        (message) =>
-          (message.email_sender === activeUser &&
-            message.email_receiver === selectedUser) ||
-          (message.email_sender === selectedUser &&
-            message.email_receiver === activeUser)
-      )
-      setFilteredMessages(privateMessages)
-    } else {
-      const globalMessages = messages.filter(
-        (message) => message.email_receiver === null
-      )
-      setFilteredMessages(globalMessages)
+    if (!session || !session.user) {
+      console.error('User not authenticated')
+      return
     }
+
+    const user = session.user
+    console.log('trackUserPresence-User:', user)
+
+    // Upsert the user's presence data
+    const { error: upsertError } = await supabase.from('online_users').upsert({
+      id: user.id, // Unique user ID from Supabase Auth
+      user_email: user.email, // Email from Supabase Auth
+      status: 'online',
+      last_seen: new Date().toISOString()
+    })
+
+    if (upsertError) {
+      console.error('Upsert failed:', upsertError.message)
+    }
+
+    // Handle user going offline
+
+    window.addEventListener('beforeunload', async () => {
+      await supabase
+        .from('online_users')
+        .update({
+          status: 'offline',
+          last_seen: new Date().toISOString()
+        })
+        .eq('user_email', user.email)
+    })
   }
 
   useEffect(() => {
-    getMessages()
-  }, [])
+    // Start tracking the current user's presence
+    //! should be moved to login and logout to get a better tracking
+    trackUserPresence()
 
-  useEffect(() => {
-    getSession()
-  }, [])
+    // Fetch and listen for online users
+    const fetchOnlineUsers = async () => {
+      const users = await getOnlineUsers()
+      setOnlineUsers(users)
+    }
 
-  useEffect(() => {
+    fetchOnlineUsers()
+
     const channel = supabase
       .channel('*')
       .on(
-        TABLE_REALTIME_EVENTS.POSTGRES_CHANGES,
-        {
-          event: TABLE_SQL_QUERIES.INSERT,
-          schema: TABLE_SCHEMA.PUBLIC,
-          table: TABLE_SQL_NAMES.MESSAGES
-        },
-        (payload: { new: Message }) => {
-          const newMessage = payload.new
-          setMessages((prevMessages: Message[]) => [
-            ...prevMessages,
-            newMessage
-          ])
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'online_users' },
+        (payload) => {
+          console.log('Change detected in online users:', payload)
+
+          // Update the state based on the type of event (INSERT, UPDATE, DELETE)
+          if (
+            payload.eventType === 'INSERT' ||
+            payload.eventType === 'UPDATE'
+          ) {
+            const updatedUser = payload.new
+
+            // Check if user already exists in onlineUsers
+            setOnlineUsers((prev) => {
+              const userExists = prev.some(
+                (user) => user.user_email === updatedUser.user_email
+              )
+
+              // Add new user or update existing one
+              if (updatedUser.status === 'online' && !userExists) {
+                return [...prev, { user_email: updatedUser.user_email }]
+              }
+
+              // Update existing user's status
+              return prev.map((user) =>
+                user.user_email === updatedUser.user_email
+                  ? { user_email: updatedUser.user_email } // Ensure we only keep the user_email
+                  : user)
+            })
+          }
+
+          if (payload.eventType === 'DELETE') {
+            const deletedUser = payload.old
+            setOnlineUsers((prev) =>
+              prev.filter((user) => user.user_email !== deletedUser.user_email))
+          }
         }
       )
       .subscribe()
 
     return () => {
+      const markUserOffline = async () => {
+        const {
+          data: { session }
+        } = await supabase.auth.getSession()
+
+        if (session?.user?.email) {
+          await supabase
+            .from('online_users')
+            .update({
+              status: 'offline',
+              last_seen: new Date().toISOString()
+            })
+            .eq('user_email', session.user.email)
+        }
+      }
+      markUserOffline()
+
       supabase.removeChannel(channel)
     }
-  }, [])
-
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
-
+  }, [activeUser])
   return (
     <section className='chat__room__container'>
       {userInfo && (
         <>
           <RoomDetails userData={userInfo} />
-          {/* User Selector for Private Chat */}
           <div>
             <select
               onChange={(e) => setSelectedUser(e.target.value)}
@@ -145,6 +186,16 @@ function ChatRoom() {
                 ))}
             </select>
           </div>
+          {
+            <div>
+              <h2>Online Users</h2>
+              <ul>
+                {onlineUsers.map((user, index) => (
+                  <li key={index}>{user.user_email}</li>
+                ))}
+              </ul>
+            </div>
+          }
           {filteredMessages && (
             <div className='messages__container'>
               <div className='messages__content'>
@@ -158,31 +209,11 @@ function ChatRoom() {
           )}
           <SendMessage
             userData={userInfo}
-            selectedUser={selectedUser}
-          />{' '}
-          {/* Pass selectedUser */}
+            targetUser={selectedUser}
+          />
         </>
       )}
     </section>
-    // <section className='chat__room__container'>
-    //   {userInfo && (
-    //     <>
-    //       <RoomDetails userData={userInfo} />
-    //       {messages && (
-    //         <div className='messages__container'>
-    //           <div className='messages__content'>
-    //             <MessagesCard
-    //               messages={messages}
-    //               activeUser={activeUser}
-    //             />
-    //             <div ref={scrollRef}></div>
-    //           </div>
-    //         </div>
-    //       )}
-    //       <SendMessage userData={userInfo} />
-    //     </>
-    //   )}
-    // </section>
   )
 }
 

@@ -5,9 +5,10 @@ import type { ChatUser } from '../../../../shared/types/user'
 
 interface SendMessageProps {
   userData: ChatUser
+  targetUser: string | null
 }
 
-function SendMessage({ userData }: SendMessageProps) {
+function SendMessage({ userData, targetUser }: SendMessageProps) {
   const [newMessage, setNewMessage] = useState('')
 
   const handleSendMessage = async (e: FormEvent<HTMLFormElement>) => {
@@ -19,7 +20,8 @@ function SendMessage({ userData }: SendMessageProps) {
 
     const insertMessage = await supabase.from('messages').insert({
       content: newMessage,
-      email: userData.user_metadata.email
+      email_sender: userData.user_metadata.email,
+      email_receiver: targetUser || null
     })
 
     if (insertMessage.error) {

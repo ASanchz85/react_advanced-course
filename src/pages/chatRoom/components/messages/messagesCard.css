@@ -4,7 +4,7 @@
   flex-direction: column;
   gap: 0.5rem;
   min-width: 30%;
-  max-width: 93%;
+  max-width: 85%;
   padding: 1rem;
   margin: 0.5rem 0;
   background-color: var(--tertiary-color);

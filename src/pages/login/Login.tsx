@@ -6,11 +6,24 @@ function Login() {
   const [onLoginOver, setOnLoginOver] = useState(false)
 
   const handleLogIn = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google'
-    })
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/global-chat`
+        }
+      })
 
-    console.log(data, error)
+      console.log('handleLogIn:', data)
+
+      if (error) {
+        throw error
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error logging in:', error.message)
+      }
+    }
   }
 
   return (
