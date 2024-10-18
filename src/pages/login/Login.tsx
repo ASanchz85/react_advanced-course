@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import supabase from '../../shared/services/supabaseClient'
+import { useSession } from '../../shared/hooks'
 import './login.css'
 
 function Login() {
   const [onLoginOver, setOnLoginOver] = useState(false)
+  const { session } = useSession()
 
   const handleLogIn = async () => {
     try {
@@ -14,14 +16,27 @@ function Login() {
         }
       })
 
-      console.log('handleLogIn:', data)
-
       if (error) {
-        throw error
+        throw new Error(error.message || 'Error logging in')
+      }
+
+      if (data && session?.user) {
+        const { error: upsertError } = await supabase
+          .from('online_users')
+          .upsert({
+            id: session.user.id,
+            user_email: session.user.email,
+            status: 'online',
+            last_seen: new Date().toISOString()
+          })
+
+        if (upsertError) {
+          throw new Error(upsertError.message || 'Error registering log-in')
+        }
       }
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Error logging in:', error.message)
+        console.error('[ERROR]:', error.message)
       }
     }
   }

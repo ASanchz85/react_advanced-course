@@ -13,24 +13,23 @@ export const useSession = () => {
       const { data, error } = await supabase.auth.getSession()
 
       if (error) {
-        throw error
+        throw new Error(error.message || 'Error fetching session')
       }
 
       if (data) {
         setSession(data.session)
       }
 
-      if (data?.session?.user?.user_metadata) {
-        const { avatar_url, full_name, email } = data.session.user.user_metadata
-        setUserInfo({ user_metadata: { avatar_url, full_name, email } })
+      if (!data.session || !data.session.user) {
+        throw new Error('User not authenticated')
       }
 
-      if (data?.session?.user?.email) {
-        setActiveUser(data.session.user.email)
-      }
+      const { avatar_url, full_name, email } = data.session.user.user_metadata
+      setUserInfo({ user_metadata: { avatar_url, full_name, email } })
+      setActiveUser(email)
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Error fetching messages:', error.message)
+        console.error('[ERROR]:', error.message)
       }
     }
   }

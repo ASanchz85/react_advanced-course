@@ -33,7 +33,7 @@ export const useGlobalMessages = () => {
     getMessages()
 
     const channel = supabase
-      .channel('*')
+      .channel(TABLE_SQL_QUERIES.SELECT_ALL)
       .on(
         TABLE_REALTIME_EVENTS.POSTGRES_CHANGES,
         {
