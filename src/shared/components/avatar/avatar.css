@@ -2,19 +2,26 @@
   display: flex;
   flex: 1;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 0;
   gap: 2rem;
+}
+
+.avatar__image__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 0.3rem solid var(--tertiary-color);
+  overflow: hidden;
 }
 
 .avatar__image {
   height: 100px;
-  width: 100px;
-  border-radius: 50%;
+  width: auto;
 }
 
 .avatar__details {
   display: flex;
   flex-direction: column;
-  line-height: 0;
-  color: black;
+  color: var(--tertiary-color);
 }

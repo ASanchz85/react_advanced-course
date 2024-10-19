@@ -28,36 +28,31 @@ function ChatRoom() {
   return (
     <section className='chat__room__container'>
       {userInfo && (
-        <>
-          <RoomDetails userData={userInfo} />
-          <div>
-            <select
-              onChange={(e) => setSelectedUser(e.target.value)}
-              value={selectedUser || ''}
-            >
-              <option value=''>Global Chat</option>
+        <div className='chat__room__content'>
+          <div className='users__container'>
+            <h2>Online Users</h2>
+            <ul className='users__list'>
+              <li className='users__list-item'>Global Chat</li>
               {allUsers
                 .filter((email) => email !== activeUser)
                 .map((email) => (
-                  <option
+                  <li
                     key={email}
                     value={email}
+                    onClick={() => setSelectedUser(email)}
+                    className='users__list-item'
                   >
                     {email}
-                  </option>
+                  </li>
                 ))}
-            </select>
-          </div>
-          <div>
-            <h2>Online Users</h2>
-            <ul>
-              {onlineUsers.map((user, index) => (
-                <li key={index}>{user.user_email}</li>
-              ))}
+              {/*               {onlineUsers.map((user, index) => (
+                    <li key={index}>{user.user_email}</li>
+                  ))} */}
             </ul>
           </div>
-          {filteredMessages && (
-            <div className='messages__container'>
+          <div className='messages__container'>
+            <RoomDetails userData={userInfo} />
+            {filteredMessages && (
               <div className='messages__content'>
                 <MessagesCard
                   messages={filteredMessages}
@@ -65,13 +60,13 @@ function ChatRoom() {
                 />
                 <div ref={scrollRef}></div>
               </div>
-            </div>
-          )}
-          <SendMessage
-            userData={userInfo}
-            targetUser={selectedUser}
-          />
-        </>
+            )}
+            <SendMessage
+              userData={userInfo}
+              targetUser={selectedUser}
+            />
+          </div>
+        </div>
       )}
     </section>
   )

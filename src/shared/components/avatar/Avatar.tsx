@@ -7,14 +7,16 @@ function Avatar({ userMetadata }: { userMetadata: UserChatMetadata }) {
     <>
       {userMetadata && (
         <div className='avatar__container'>
-          <img
-            src={userMetadata.avatar_url ?? '/profile_fallback.png'}
-            alt={userMetadata.full_name}
-            className='avatar__image'
-            onError={(e) => {
-              e.currentTarget.src = 'profile_fallback.png'
-            }}
-          />
+          <div className='avatar__image__container'>
+            <img
+              src={userMetadata.avatar_url ?? '/profile_fallback.png'}
+              alt={userMetadata.full_name}
+              className='avatar__image'
+              onError={(e) => {
+                e.currentTarget.src = 'profile_fallback.png'
+              }}
+            />
+          </div>
           <div className='avatar__details'>
             <p>{emailParser(userMetadata.email)}</p>
             <p>online</p>

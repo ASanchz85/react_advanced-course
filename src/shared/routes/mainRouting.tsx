@@ -13,7 +13,7 @@ const routes = createRoutesFromElements(
       element={<Layout />}
     >
       <Route
-        path='/global-chat'
+        index
         element={<ChatRoom />}
       />
       {/* <Route

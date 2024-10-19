@@ -1,5 +1,4 @@
 import { FaArrowAltCircleLeft } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
 import Avatar from '../../../../shared/components/avatar/Avatar'
 import supabase from '../../../../shared/services/supabaseClient'
 import type { ChatUser } from '../../../../shared/types/user'
@@ -9,7 +8,6 @@ interface RoomDetailsProps {
 }
 
 function RoomDetails({ userData }: RoomDetailsProps) {
-  const navigate = useNavigate()
 
   const handleLogOut = async () => {
     const { error } = await supabase.auth.signOut()
@@ -32,16 +30,16 @@ function RoomDetails({ userData }: RoomDetailsProps) {
         })
         .eq('user_email', session.user.email)
     }
-
-    navigate('/')
   }
 
   return (
     <header className='details__header'>
-      <Avatar userMetadata={userData.user_metadata} />
-      <span onClick={handleLogOut}>
-        <FaArrowAltCircleLeft />
-      </span>
+      <div className='active_user__content'>
+        <Avatar userMetadata={userData.user_metadata} />
+        <span onClick={handleLogOut}>
+          <FaArrowAltCircleLeft />
+        </span>
+      </div>
     </header>
   )
 }

@@ -10,10 +10,10 @@ function Login() {
   const handleLogIn = async () => {
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
+        provider: 'google'
+        /*         options: {
           redirectTo: `${window.location.origin}/global-chat`
-        }
+        } */
       })
 
       if (error) {
