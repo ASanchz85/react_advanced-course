@@ -16,12 +16,12 @@
 }
 
 .avatar__image {
-  height: 100px;
+  height: 80px;
   width: auto;
 }
 
 .avatar__details {
   display: flex;
   flex-direction: column;
-  color: var(--tertiary-color);
+  color: var(--secondary-color);
 }

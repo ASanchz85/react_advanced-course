@@ -47,7 +47,7 @@
 }
 
 .single__message.received {
-  background-color: var(--tertiary-color);
+  background-color: var(--primary-color);
   align-self: flex-start;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -61,7 +61,7 @@
   right: -0.85rem;
   width: 0;
   height: 0;
-  border-top: 1rem solid var(--tertiary-color);
+  border-top: 1rem solid var(--primary-color);
   border-right: 1rem solid transparent;
 }
 

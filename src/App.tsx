@@ -8,7 +8,7 @@ import supabase from './shared/services/supabaseClient'
 function App() {
   const { session } = useSession()
 
-  const handleUserTracking = async () => {
+  /*   const handleUserTracking = async () => {
     if (session?.user?.email) {
       await supabase
         .from('online_users')
@@ -26,7 +26,7 @@ function App() {
     return () => {
       window.removeEventListener('beforeunload', handleUserTracking)
     }
-  }, [])
+  }, []) */
 
   return <>{session ? <RouterProvider router={mainRouting} /> : <Login />}</>
 }

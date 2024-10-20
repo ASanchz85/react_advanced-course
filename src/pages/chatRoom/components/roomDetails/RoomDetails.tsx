@@ -1,4 +1,5 @@
-import { FaArrowAltCircleLeft } from 'react-icons/fa'
+import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
+import { IoCall, IoVideocam } from 'react-icons/io5'
 import Avatar from '../../../../shared/components/avatar/Avatar'
 import supabase from '../../../../shared/services/supabaseClient'
 import type { ChatUser } from '../../../../shared/types/user'
@@ -8,7 +9,6 @@ interface RoomDetailsProps {
 }
 
 function RoomDetails({ userData }: RoomDetailsProps) {
-
   const handleLogOut = async () => {
     const { error } = await supabase.auth.signOut()
 
@@ -36,9 +36,17 @@ function RoomDetails({ userData }: RoomDetailsProps) {
     <header className='details__header'>
       <div className='active_user__content'>
         <Avatar userMetadata={userData.user_metadata} />
-        <span onClick={handleLogOut}>
-          <FaArrowAltCircleLeft />
-        </span>
+        <div className='icons__container'>
+          <span className='icons_item'>
+            <IoCall />
+          </span>
+          <span className='icons_item'>
+            <IoVideocam />
+          </span>
+          <span className='icons_item'>
+            <PiDotsThreeOutlineVerticalFill />
+          </span>
+        </div>
       </div>
     </header>
   )

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { RoomDetails, MessagesCard, SendMessage } from './components'
-import './chatRoom.css'
+import { RoomDetails, MessagesCard, SendMessage, UsersList } from './components'
 import {
   useGetOnlineUsers,
   useGlobalMessages,
   usePrivateMessages,
   useSession
 } from '../../shared/hooks'
+import './chatRoom.css'
 
 function ChatRoom() {
   const [selectedUser, setSelectedUser] = useState<string | null>(null)
@@ -29,27 +29,10 @@ function ChatRoom() {
     <section className='chat__room__container'>
       {userInfo && (
         <div className='chat__room__content'>
-          <div className='users__container'>
-            <h2>Online Users</h2>
-            <ul className='users__list'>
-              <li className='users__list-item'>Global Chat</li>
-              {allUsers
-                .filter((email) => email !== activeUser)
-                .map((email) => (
-                  <li
-                    key={email}
-                    value={email}
-                    onClick={() => setSelectedUser(email)}
-                    className='users__list-item'
-                  >
-                    {email}
-                  </li>
-                ))}
-              {/*               {onlineUsers.map((user, index) => (
-                    <li key={index}>{user.user_email}</li>
-                  ))} */}
-            </ul>
-          </div>
+          <UsersList
+            allUsers={allUsers}
+            currentUser={userInfo}
+          />
           <div className='messages__container'>
             <RoomDetails userData={userInfo} />
             {filteredMessages && (
