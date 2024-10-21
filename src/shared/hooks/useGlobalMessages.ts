@@ -5,7 +5,7 @@ import {
   TABLE_SCHEMA,
   TABLE_SQL_NAMES,
   TABLE_SQL_QUERIES
-} from '../config/constants'
+} from '../config/tableConstants'
 import type { Message } from '../types/messages'
 
 export const useGlobalMessages = () => {

@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 import type { ChatUser } from '../../../../shared/types/user'
 import SearchBar from '../../../../shared/components/searchBar/SearchBar'
 import Avatar from '../../../../shared/components/avatar/Avatar'
-import { GLOBLAL_CHAT_USER_DETAILS } from '../../../../shared/config/constants'
+import { GLOBLAL_CHAT_USER_DETAILS } from '../../../../shared/config/tableConstants'
 
 interface UsersListProps {
   allUsers: string[]

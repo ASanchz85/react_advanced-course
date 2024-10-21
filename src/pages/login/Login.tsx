@@ -2,10 +2,11 @@ import { useState } from 'react'
 import supabase from '../../shared/services/supabaseClient'
 import { useSession } from '../../shared/hooks'
 import getBase64FromImageUrl from '../../shared/helpers/getBase64FromImageUrl'
+import { isNterEmail } from '../../shared/utils/nterEmailHandler'
 import {
   TABLE_MESSAGE_FIELDS,
   TABLE_SQL_NAMES
-} from '../../shared/config/constants'
+} from '../../shared/config/tableConstants'
 import './login.css'
 
 function Login() {
@@ -13,7 +14,9 @@ function Login() {
   const { session } = useSession()
 
   const storeUserDataWithAvatar = async (userId: string, avatarUrl: string) => {
+    console.log('Storing user data:', userId, avatarUrl)
     const base64Image = await getBase64FromImageUrl(avatarUrl)
+    console.log('base64Image:', base64Image)
 
     const { data, error } = await supabase
       .from(TABLE_SQL_NAMES.MESSAGES)
@@ -65,7 +68,14 @@ function Login() {
     if (event === 'SIGNED_IN') {
       const user = session?.user
       console.log('User session:', user)
-      if (user && user.email && user.user_metadata.avatar_url) {
+      console.log('path to image:', window.location.origin + '/NWorld_logo.png')
+      if (user && user.email) {
+        if (isNterEmail(user.email)) {
+          await storeUserDataWithAvatar(
+            user.email,
+            window.location.origin + '/NWorld_logo.png'
+          )
+        }
         await storeUserDataWithAvatar(user.email, user.user_metadata.avatar_url)
       }
     }

@@ -7,7 +7,7 @@ import {
   TABLE_SQL_QUERIES,
   TABLE_USER_FIELDS,
   TABLE_USER_STATUS
-} from '../config/constants'
+} from '../config/tableConstants'
 
 export const useGetOnlineUsers = () => {
   const [onlineUsers, setOnlineUsers] = useState<{ user_email: string }[]>([])
