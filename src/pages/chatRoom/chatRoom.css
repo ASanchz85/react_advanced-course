@@ -9,18 +9,13 @@
   display: flex;
   height: 100%;
   background-color: var(--tertiary-color);
-  /* border: 1rem solid var(--secondary-color); */
-  /* border-radius: 0.5rem; */
 }
 
 .users__container {
   display: flex;
   flex: 1;
   flex-direction: column;
-  /* padding: 0.5rem; */
   height: 100%;
-  /*   border-radius: 0.5rem;
-  border: 2px solid var(--tertiary-color); */
   background-color: var(--secondary-color);
   overflow-y: auto;
   scroll-behavior: smooth;
@@ -36,7 +31,6 @@
 
 .users__title h2 {
   padding: 2rem;
-  /* border-radius: 0.5rem; */
 }
 
 .users__list {
@@ -82,6 +76,7 @@
 
 .users__list-item:hover {
   background-color: rgba(var(--primary-color-rgb), 0.2);
+  color: var(--quaternary-color);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
@@ -89,9 +84,7 @@
 .details__header {
   display: flex;
   max-height: 120px;
-  border-bottom: 2px solid var(--tertiary-color-rgb);
-  /*   border-bottom: 1rem solid var(--secondary-color);
-  border-radius: 0.5rem; */
+  border-bottom: 2px solid var(--secondary-color);
 }
 
 .active_user__content {
@@ -100,8 +93,6 @@
   padding: 1rem;
   justify-content: space-between;
   align-items: center;
-  /*   border-radius: 0.5rem;
-  border: 2px solid var(--primary-color); */
   background-color: var(--tertiary-color);
 }
 
@@ -139,8 +130,6 @@
   height: 100%;
   width: 100%;
   background-color: var(--quaternary-color);
-  /*   border-left: 1rem solid var(--secondary-color);
-  border-bottom: none; */
 }
 
 .messages__content {
@@ -151,8 +140,6 @@
   padding: 1rem;
   height: 100%;
   background-color: var(--quaternary-color);
-  /*   border-radius: 0.5rem;
-  border: 2px solid var(--tertiary-color); */
 }
 
 .messages__content::-webkit-scrollbar-track {
@@ -162,7 +149,6 @@
 
 .messages__content::-webkit-scrollbar-thumb {
   background-color: var(--secondary-color);
-  border-radius: 0.5rem;
 }
 
 .messages__content::-webkit-scrollbar {
@@ -174,7 +160,6 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
-  /* border-top: 1rem solid var(--secondary-color); */
   background-color: var(--tertiary-color);
 }
 
@@ -201,7 +186,6 @@
 .send__message_input__container input:focus {
   outline: none;
   border: 2px solid var(--secondary-color);
-  /* background-color: var(--tertiary-color); */
 }
 
 .send__message_input__container button {

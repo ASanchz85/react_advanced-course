@@ -19,6 +19,9 @@ function ChatRoom() {
     selectedUser
   })
 
+  //!
+  console.log('ChatRoom-userInfo:', userInfo)
+
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

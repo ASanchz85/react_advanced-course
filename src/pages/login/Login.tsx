@@ -1,11 +1,31 @@
 import { useState } from 'react'
 import supabase from '../../shared/services/supabaseClient'
 import { useSession } from '../../shared/hooks'
+import getBase64FromImageUrl from '../../shared/helpers/getBase64FromImageUrl'
+import {
+  TABLE_MESSAGE_FIELDS,
+  TABLE_SQL_NAMES
+} from '../../shared/config/constants'
 import './login.css'
 
 function Login() {
   const [onLoginOver, setOnLoginOver] = useState(false)
   const { session } = useSession()
+
+  const storeUserDataWithAvatar = async (userId: string, avatarUrl: string) => {
+    const base64Image = await getBase64FromImageUrl(avatarUrl)
+
+    const { data, error } = await supabase
+      .from(TABLE_SQL_NAMES.MESSAGES)
+      .update({ avatar_image: base64Image })
+      .eq(TABLE_MESSAGE_FIELDS.EMAIL_SENDER, userId)
+
+    if (error) {
+      console.error('Error storing user data:', error)
+    } else {
+      console.log('User data stored successfully:', data)
+    }
+  }
 
   const handleLogIn = async () => {
     try {
@@ -40,6 +60,16 @@ function Login() {
       }
     }
   }
+
+  supabase.auth.onAuthStateChange(async (event, session) => {
+    if (event === 'SIGNED_IN') {
+      const user = session?.user
+      console.log('User session:', user)
+      if (user && user.email && user.user_metadata.avatar_url) {
+        await storeUserDataWithAvatar(user.email, user.user_metadata.avatar_url)
+      }
+    }
+  })
 
   return (
     <section className='login__container'>

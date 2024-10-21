@@ -18,8 +18,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+}
+
+.sidebar__icons,
+.sidebar__help {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
+  margin: 2rem 0;
 }
 
 .sidebar__links a {

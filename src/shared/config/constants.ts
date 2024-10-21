@@ -1,3 +1,9 @@
+export const GLOBLAL_CHAT_USER_DETAILS = {
+  full_name: 'Global Chat' as const,
+  email: 'Global Chat' as const,
+  avatar_url: 'Nchat_logo_small.png' as const
+}
+
 export const TABLE_SQL_NAMES = {
   MESSAGES: 'messages',
   ONLINE_USERS: 'online_users'
@@ -16,6 +22,15 @@ export const TABLE_REALTIME_EVENTS = {
 
 export const TABLE_SCHEMA = {
   PUBLIC: 'public' as const
+}
+
+export const TABLE_MESSAGE_FIELDS = {
+  ID: 'id' as const,
+  EMAIL_SENDER: 'email_sender' as const,
+  EMAIL_RECEIVER: 'email_receiver' as const,
+  CONTENT: 'content' as const,
+  CREATED_AT: 'created_at' as const,
+  AVATAR_IMAGE: 'avatar_image' as const
 }
 
 export const TABLE_USER_FIELDS = {
