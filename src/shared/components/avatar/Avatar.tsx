@@ -1,4 +1,5 @@
 import { emailParser } from '../../utils/stringHandler'
+import { IoPersonCircle } from 'react-icons/io5'
 import type { UserChatMetadata } from '../../types/user'
 import './avatar.css'
 
@@ -8,14 +9,15 @@ function Avatar({ userMetadata }: { userMetadata: UserChatMetadata }) {
       {userMetadata && (
         <div className='avatar__container'>
           <div className='avatar__image__container'>
-            <img
-              src={userMetadata.avatar_url ?? '/profile_fallback.png'}
-              alt={userMetadata.full_name}
-              className='avatar__image'
-              onError={(e) => {
-                e.currentTarget.src = 'profile_fallback.png'
-              }}
-            />
+            {userMetadata.avatar_url ? (
+              <img
+                src={userMetadata.avatar_url}
+                alt={userMetadata.full_name}
+                className='avatar__image'
+              />
+            ) : (
+              <IoPersonCircle className='avatar__image' />
+            )}
           </div>
           <div className='avatar__details'>
             <p>{emailParser(userMetadata.email)}</p>

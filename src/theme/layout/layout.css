@@ -27,10 +27,16 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
-  padding: 0.3rem;
+  color: var(--tertiary-color);
+  padding: 1rem;
   border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar__links a:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .sidebar__links a svg {
