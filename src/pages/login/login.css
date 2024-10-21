@@ -6,7 +6,7 @@
   min-height: 100vh;
   width: 100%;
   gap: 3rem;
-  background-color: var(--primary-color);
+  background: url('/texture_bg.jpg') no-repeat center center;
 }
 
 .login__container button {
