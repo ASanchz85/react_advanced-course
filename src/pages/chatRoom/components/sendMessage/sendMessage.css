@@ -1,0 +1,42 @@
+.send__message_input__container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: var(--tertiary-color);
+}
+
+.send__message_input__container form {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  align-items: center;
+}
+
+.send__message_input__container input {
+  width: 100%;
+  padding: 0.7em 1.2em;
+  background-color: var(--quaternary-color);
+  border: 2px solid transparent;
+  border: none;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 1em;
+  color: var(--secondary-color);
+}
+
+.send__message_input__container input:focus {
+  outline: none;
+  border: 2px solid var(--secondary-color);
+}
+
+.send__message_input__container button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.send__message_input__container button svg {
+  transform: rotate(-45deg) translateY(-0.15rem);
+}

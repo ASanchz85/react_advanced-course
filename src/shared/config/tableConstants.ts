@@ -1,9 +1,3 @@
-export const GLOBLAL_CHAT_USER_DETAILS = {
-  full_name: 'Global Chat' as const,
-  email: 'Global Chat' as const,
-  avatar_url: 'Nchat_logo_small.png' as const
-}
-
 export const TABLE_SQL_NAMES = {
   MESSAGES: 'messages',
   ONLINE_USERS: 'online_users'

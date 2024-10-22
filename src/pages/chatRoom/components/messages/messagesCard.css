@@ -68,3 +68,11 @@
 .single__message-hour.received {
   left: 102%;
 }
+
+.no__message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--secondary-color);
+}

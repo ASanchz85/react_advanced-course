@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { FaSearch } from 'react-icons/fa'
+import './searchBar.css'
 
 function SearchBar() {
   const [query, setQuery] = useState('')
@@ -7,11 +9,12 @@ function SearchBar() {
     <div className='search-bar__container'>
       <input
         type='text'
-        placeholder='Type a message...'
-        className='send__message__input'
+        placeholder='Search...'
+        className='search-input'
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
+      <FaSearch className='search-icon' />
     </div>
   )
 }

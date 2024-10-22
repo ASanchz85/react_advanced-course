@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom'
+import { Avatar, SearchBar } from '../../../../shared/components'
+import { GLOBLAL_CHAT_USER_DETAILS } from '../../../../shared/config/constants'
 import type { ChatUser } from '../../../../shared/types/user'
-import SearchBar from '../../../../shared/components/searchBar/SearchBar'
-import Avatar from '../../../../shared/components/avatar/Avatar'
-import { GLOBLAL_CHAT_USER_DETAILS } from '../../../../shared/config/tableConstants'
+import './userList.css'
 
 interface UsersListProps {
   allUsers: string[]
@@ -33,7 +33,6 @@ function UsersList({ allUsers, currentUser }: UsersListProps) {
             <NavLink
               key={email}
               to={`/chat/${email}`}
-              /* onClick={() => setSelectedUser(email)} */
               className='users__list-item'
             >
               {email}

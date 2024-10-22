@@ -38,6 +38,9 @@ function Sidebar() {
         <NavLink
           to='/global-chat'
           title='Chat rooms'
+          className={({ isActive }) =>
+            isActive || location.pathname.includes('chat') ? 'active' : ''
+          }
         >
           <PiChatsCircleFill />
         </NavLink>

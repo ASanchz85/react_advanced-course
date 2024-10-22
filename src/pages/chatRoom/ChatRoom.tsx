@@ -1,16 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
-import { RoomDetails, MessagesCard, SendMessage, UsersList } from './components'
+import { useParams } from 'react-router-dom'
+import {
+  RoomDetails,
+  MessagesCard,
+  SendMessage,
+  UsersList,
+  NoMessagesYet
+} from './components'
 import {
   useGlobalMessages,
   usePrivateMessages,
   useSession
 } from '../../shared/hooks'
-import { pathFindChatRoom } from '../../shared/utils/pathHandler'
 import './chatRoom.css'
 
 function ChatRoom() {
-  const currentChatRoom = pathFindChatRoom()
-  console.log(currentChatRoom)
+  const { targetUser } = useParams()
 
   const [selectedUser, setSelectedUser] = useState<string | null>(null)
   const { userInfo, activeUser } = useSession()
@@ -22,6 +27,10 @@ function ChatRoom() {
   })
 
   const scrollRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setSelectedUser(targetUser ? targetUser : null)
+  }, [targetUser])
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -39,10 +48,14 @@ function ChatRoom() {
             <RoomDetails userData={userInfo} />
             {filteredMessages && (
               <div className='messages__content'>
-                <MessagesCard
-                  messages={filteredMessages}
-                  activeUser={activeUser}
-                />
+                {filteredMessages.length > 0 ? (
+                  <MessagesCard
+                    messages={filteredMessages}
+                    activeUser={activeUser}
+                  />
+                ) : (
+                  <NoMessagesYet />
+                )}
                 <div ref={scrollRef}></div>
               </div>
             )}
