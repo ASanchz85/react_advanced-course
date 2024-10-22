@@ -2,7 +2,7 @@ import { useState } from 'react'
 import supabase from '../../shared/services/supabaseClient'
 import { useSession } from '../../shared/hooks'
 import getBase64FromImageUrl from '../../shared/helpers/getBase64FromImageUrl'
-import { isNterEmail } from '../../shared/utils/nterEmailHandler'
+import { isNterEmail } from '../../shared/utils/emailHandler'
 import {
   TABLE_MESSAGE_FIELDS,
   TABLE_SQL_NAMES

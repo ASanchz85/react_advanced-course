@@ -2,7 +2,7 @@ import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
 import { IoCall, IoVideocam } from 'react-icons/io5'
 import Avatar from '../../../../shared/components/avatar/Avatar'
 import type { ChatUser } from '../../../../shared/types/user'
-import { isNterEmail } from '../../../../shared/utils/nterEmailHandler'
+import { isNterEmail } from '../../../../shared/utils/emailHandler'
 import { IMAGES } from '../../../../shared/config/constants'
 
 interface RoomDetailsProps {
