@@ -21,7 +21,7 @@ const routes = createRoutesFromElements(
         element={<ChatRoom />}
       />
       <Route
-        path='chat/:activeUser/:targetUser'
+        path='chat/:targetUser'
         element={<ChatRoom />}
       />
       <Route

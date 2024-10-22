@@ -1,5 +1,5 @@
-import { emailParser } from '../../utils/stringHandler'
 import { IoPersonCircle } from 'react-icons/io5'
+import { emailParser } from '../../utils/emailHandler'
 import type { UserChatMetadata } from '../../types/user'
 import './avatar.css'
 

@@ -32,7 +32,7 @@ function UsersList({ allUsers, currentUser }: UsersListProps) {
           .map((email) => (
             <NavLink
               key={email}
-              to={`${email}`}
+              to={`/chat/${email}`}
               /* onClick={() => setSelectedUser(email)} */
               className='users__list-item'
             >

@@ -1,5 +1,5 @@
-import { emailParser } from '../../../../shared/utils/stringHandler'
 import { getHourFromDate } from '../../../../shared/utils/dateHandler'
+import { emailParser } from '../../../../shared/utils/emailHandler'
 import type { Message } from '../../../../shared/types/messages'
 import './messagesCard.css'
 

@@ -29,6 +29,7 @@
 .avatar__image__container.image__container__userList {
   border: none;
   color: var(--tertiary-color);
+  background-color: transparent;
 }
 
 .avatar__image {

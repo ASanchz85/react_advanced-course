@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import { RoomDetails, MessagesCard, SendMessage, UsersList } from './components'
 import {
-  useGetOnlineUsers,
   useGlobalMessages,
   usePrivateMessages,
   useSession
 } from '../../shared/hooks'
+import { pathFindChatRoom } from '../../shared/utils/pathHandler'
 import './chatRoom.css'
 
 function ChatRoom() {
+  const currentChatRoom = pathFindChatRoom()
+  console.log(currentChatRoom)
+
   const [selectedUser, setSelectedUser] = useState<string | null>(null)
   const { userInfo, activeUser } = useSession()
-  const { onlineUsers } = useGetOnlineUsers()
   const { messages } = useGlobalMessages()
   const { filteredMessages, allUsers } = usePrivateMessages({
     messages,
