@@ -2,12 +2,21 @@ import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
 import { IoCall, IoVideocam } from 'react-icons/io5'
 import Avatar from '../../../../shared/components/avatar/Avatar'
 import type { ChatUser } from '../../../../shared/types/user'
+import { isNterEmail } from '../../../../shared/utils/nterEmailHandler'
+import { IMAGES } from '../../../../shared/config/constants'
 
 interface RoomDetailsProps {
   userData: ChatUser
 }
 
 function RoomDetails({ userData }: RoomDetailsProps) {
+  if (
+    !userData.user_metadata.avatar_url &&
+    isNterEmail(userData.user_metadata.email)
+  ) {
+    userData.user_metadata.avatar_url = IMAGES.NWORLD
+  }
+
   return (
     <header className='details__header'>
       <div className='active_user__content'>

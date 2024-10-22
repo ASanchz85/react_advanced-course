@@ -22,6 +22,7 @@
   justify-content: center;
   border-radius: 50%;
   border: 0.3rem solid var(--secondary-color);
+  background-color: var(--secondary-color);
   overflow: hidden;
 }
 
@@ -32,7 +33,7 @@
 
 .avatar__image {
   height: 70px;
-  width: auto;
+  width: 70PX;
   color: var(--secondary-color);
 }
 

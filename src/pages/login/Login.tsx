@@ -11,52 +11,52 @@ import './login.css'
 
 function Login() {
   const [onLoginOver, setOnLoginOver] = useState(false)
-  const { session } = useSession()
+  // const { session } = useSession()
 
-  const storeUserDataWithAvatar = async (userId: string, avatarUrl: string) => {
-    console.log('Storing user data:', userId, avatarUrl)
-    const base64Image = await getBase64FromImageUrl(avatarUrl)
-    console.log('base64Image:', base64Image)
+  // const storeUserDataWithAvatar = async (userId: string, avatarUrl: string) => {
+  //   console.log('Storing user data:', userId, avatarUrl)
+  //   const base64Image = await getBase64FromImageUrl(avatarUrl)
+  //   console.log('base64Image:', base64Image)
 
-    const { data, error } = await supabase
-      .from(TABLE_SQL_NAMES.MESSAGES)
-      .update({ avatar_image: base64Image })
-      .eq(TABLE_MESSAGE_FIELDS.EMAIL_SENDER, userId)
+  //   const { data, error } = await supabase
+  //     .from(TABLE_SQL_NAMES.MESSAGES)
+  //     .update({ avatar_image: base64Image })
+  //     .eq(TABLE_MESSAGE_FIELDS.EMAIL_SENDER, userId)
 
-    if (error) {
-      console.error('Error storing user data:', error)
-    } else {
-      console.log('User data stored successfully:', data)
-    }
-  }
+  //   if (error) {
+  //     console.error('Error storing user data:', error)
+  //   } else {
+  //     console.log('User data stored successfully:', data)
+  //   }
+  // }
 
   const handleLogIn = async () => {
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google'
-        /*         options: {
+        provider: 'google',
+        options: {
           redirectTo: `${window.location.origin}/global-chat`
-        } */
+        }
       })
 
       if (error) {
         throw new Error(error.message || 'Error logging in')
       }
 
-      if (data && session?.user) {
-        const { error: upsertError } = await supabase
-          .from('online_users')
-          .upsert({
-            id: session.user.id,
-            user_email: session.user.email,
-            status: 'online',
-            last_seen: new Date().toISOString()
-          })
+      // if (data && session?.user) {
+      //   const { error: upsertError } = await supabase
+      //     .from('online_users')
+      //     .upsert({
+      //       id: session.user.id,
+      //       user_email: session.user.email,
+      //       status: 'online',
+      //       last_seen: new Date().toISOString()
+      //     })
 
-        if (upsertError) {
-          throw new Error(upsertError.message || 'Error registering log-in')
-        }
-      }
+      //   if (upsertError) {
+      //     throw new Error(upsertError.message || 'Error registering log-in')
+      //   }
+      // }
     } catch (error) {
       if (error instanceof Error) {
         console.error('[ERROR]:', error.message)
@@ -64,22 +64,22 @@ function Login() {
     }
   }
 
-  supabase.auth.onAuthStateChange(async (event, session) => {
-    if (event === 'SIGNED_IN') {
-      const user = session?.user
-      console.log('User session:', user)
-      console.log('path to image:', window.location.origin + '/NWorld_logo.png')
-      if (user && user.email) {
-        if (isNterEmail(user.email)) {
-          await storeUserDataWithAvatar(
-            user.email,
-            window.location.origin + '/NWorld_logo.png'
-          )
-        }
-        await storeUserDataWithAvatar(user.email, user.user_metadata.avatar_url)
-      }
-    }
-  })
+  // supabase.auth.onAuthStateChange(async (event, session) => {
+  //   if (event === 'SIGNED_IN') {
+  //     const user = session?.user
+  //     console.log('User session:', user)
+  //     console.log('path to image:', window.location.origin + '/NWorld_logo.png')
+  //     if (user && user.email) {
+  //       if (isNterEmail(user.email)) {
+  //         await storeUserDataWithAvatar(
+  //           user.email,
+  //           window.location.origin + '/NWorld_logo.png'
+  //         )
+  //       }
+  //       await storeUserDataWithAvatar(user.email, user.user_metadata.avatar_url)
+  //     }
+  //   }
+  // })
 
   return (
     <section className='login__container'>

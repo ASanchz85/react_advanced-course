@@ -1,9 +1,9 @@
+import { NavLink } from 'react-router-dom'
 import { FaPalette } from 'react-icons/fa'
 import { IoSettings } from 'react-icons/io5'
 import { IoHelpCircleSharp } from 'react-icons/io5'
 import { PiChatsCircleFill } from 'react-icons/pi'
 import { IoLogOut } from 'react-icons/io5'
-import { NavLink } from 'react-router-dom'
 import supabase from '../../../../shared/services/supabaseClient'
 
 function Sidebar() {
@@ -29,26 +29,26 @@ function Sidebar() {
         .eq('user_email', session.user.email)
     }
 
-    window.location.reload()
+    // window.location.reload()
   }
 
   return (
     <div className='sidebar__links'>
       <div className='sidebar__icons'>
         <NavLink
-          to='/'
+          to='/global-chat'
           title='Chat rooms'
         >
           <PiChatsCircleFill />
         </NavLink>
         <NavLink
-          to='/about'
+          to='/theme'
           title='Edit theme'
         >
           <FaPalette />
         </NavLink>
         <NavLink
-          to='/about'
+          to='/profile'
           title='Edit profile'
         >
           <IoSettings />
@@ -56,7 +56,7 @@ function Sidebar() {
       </div>
       <div className='sidebar__help'>
         <NavLink
-          to='/about'
+          to='/nter-help'
           title='NTER help'
         >
           <IoHelpCircleSharp />

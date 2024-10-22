@@ -3,8 +3,8 @@ import {
   createRoutesFromElements,
   Route
 } from 'react-router-dom'
+import { ChatRoom, CustomTheme, Login, NterHelp, Profile } from '../../pages'
 import Layout from '../../theme/layout/Layout'
-import { ChatRoom, Profile } from '../../pages'
 
 const routes = createRoutesFromElements(
   <>
@@ -14,12 +14,24 @@ const routes = createRoutesFromElements(
     >
       <Route
         index
+        element={<Login />}
+      />
+      <Route
+        path='global-chat'
         element={<ChatRoom />}
       />
-      {/* <Route
+      <Route
         path='chat/:activeUser/:targetUser'
         element={<ChatRoom />}
-      /> */}
+      />
+      <Route
+        path='theme'
+        element={<CustomTheme />}
+      />
+      <Route
+        path='nter-help'
+        element={<NterHelp />}
+      />
       <Route
         path='profile'
         element={<Profile />}
