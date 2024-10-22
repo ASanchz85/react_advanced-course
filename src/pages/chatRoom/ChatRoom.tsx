@@ -4,7 +4,6 @@ import {
   RoomDetails,
   MessagesCard,
   SendMessage,
-  UsersList,
   NoMessagesYet
 } from './components'
 import {
@@ -12,6 +11,7 @@ import {
   usePrivateMessages,
   useSession
 } from '../../shared/hooks'
+import { AsideList } from '../../shared/components'
 import './chatRoom.css'
 
 function ChatRoom() {
@@ -40,8 +40,8 @@ function ChatRoom() {
     <section className='chat__room__container'>
       {userInfo && (
         <div className='chat__room__content'>
-          <UsersList
-            allUsers={allUsers}
+          <AsideList
+            listOfLinks={allUsers}
             currentUser={userInfo}
           />
           <div className='messages__container'>

@@ -1,10 +1,10 @@
 import { PATH_GLOBAL_CHAT } from '../../../../shared/config/constants'
 import { emailParser } from '../../../../shared/utils/emailHandler'
-import { findChatRoomByPath } from '../../../../shared/utils/pathHandler'
+import { findTitleViewByPath } from '../../../../shared/utils/pathHandler'
 import './messagesCard.css'
 
 function NoMessagesYet() {
-  const chatRoom = findChatRoomByPath()
+  const chatRoom = findTitleViewByPath()
 
   return (
     <div className='no__message'>
