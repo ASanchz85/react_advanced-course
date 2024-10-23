@@ -16,9 +16,10 @@ import {
 import './chatRoom.css'
 
 function ChatRoom() {
-  const { targetUser } = useParams()
-
   const [selectedUser, setSelectedUser] = useState<string | null>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const { targetUser } = useParams()
   const { userInfo, activeUser } = useSession()
   const { messages } = useGlobalMessages()
   const { filteredMessages, allUsers } = usePrivateMessages({
@@ -26,8 +27,6 @@ function ChatRoom() {
     activeUser,
     selectedUser
   })
-
-  const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setSelectedUser(targetUser ? targetUser : null)
