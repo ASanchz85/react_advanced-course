@@ -32,6 +32,9 @@ function Avatar({
                 src={userMetadata.avatar_url}
                 alt={userMetadata.full_name}
                 className={`avatar__image ${isUserList && 'avatar__userList'}`}
+                // onError={(e) => {
+                //   e.currentTarget.src = 'https://i.imgur.com'
+                // }}
               />
             ) : (
               <IoPersonCircle

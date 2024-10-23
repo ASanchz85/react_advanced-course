@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { ContentAreaWrapper } from '../../theme/layout/components'
 import {
   RoomDetails,
   MessagesCard,
   SendMessage,
-  NoMessagesYet
+  NoMessagesYet,
+  UserList
 } from './components'
 import {
   useGlobalMessages,
   usePrivateMessages,
   useSession
 } from '../../shared/hooks'
-import { AsideList } from '../../shared/components'
 import './chatRoom.css'
 
 function ChatRoom() {
@@ -37,36 +38,40 @@ function ChatRoom() {
   }, [messages, filteredMessages])
 
   return (
-    <section className='chat__room__container'>
+    <>
       {userInfo && (
-        <div className='chat__room__content'>
-          <AsideList
-            listOfLinks={allUsers}
-            currentUser={userInfo}
-          />
-          <div className='messages__container'>
-            <RoomDetails userData={userInfo} />
-            {filteredMessages && (
-              <div className='messages__content'>
-                {filteredMessages.length > 0 ? (
-                  <MessagesCard
-                    messages={filteredMessages}
-                    activeUser={activeUser}
-                  />
-                ) : (
-                  <NoMessagesYet />
-                )}
-                <div ref={scrollRef}></div>
-              </div>
-            )}
-            <SendMessage
-              userData={userInfo}
-              targetUser={selectedUser}
+        <ContentAreaWrapper
+          asideContent={
+            <UserList
+              listOfLinks={allUsers}
+              currentUser={userInfo}
             />
-          </div>
-        </div>
+          }
+          headerDetails={<RoomDetails userData={userInfo} />}
+          mainContent={
+            filteredMessages && (
+              <>
+                <div className='messages__content'>
+                  {filteredMessages.length > 0 ? (
+                    <MessagesCard
+                      messages={filteredMessages}
+                      activeUser={activeUser}
+                    />
+                  ) : (
+                    <NoMessagesYet />
+                  )}
+                  <div ref={scrollRef}></div>
+                </div>
+                <SendMessage
+                  userData={userInfo}
+                  targetUser={selectedUser}
+                />
+              </>
+            )
+          }
+        />
       )}
-    </section>
+    </>
   )
 }
 
