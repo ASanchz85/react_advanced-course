@@ -5,6 +5,7 @@ import {
   findTitleViewByPath,
   isChatInPath
 } from '../../../../shared/utils/pathHandler'
+import { emailParser } from '../../../../shared/utils/emailHandler'
 import { GLOBLAL_CHAT_USER_DETAILS } from '../../../../shared/config/constants'
 import type { ChatUser } from '../../../../shared/types/user'
 import './userList.css'
@@ -19,19 +20,17 @@ function UserList({ listOfLinks, currentUser }: UserListProps) {
 
   return (
     <AsideContentWrapper title={title}>
-      {isChatInPath() && <SearchBar />}
-      {isChatInPath() && (
-        <NavLink
-          to={'/global-chat'}
-          className='user__list-item'
-        >
-          <Avatar
-            userMetadata={GLOBLAL_CHAT_USER_DETAILS}
-            isGlobalChat
-            isUserList
-          />
-        </NavLink>
-      )}
+      <SearchBar />
+      <NavLink
+        to={'/global-chat'}
+        className='user__list-item'
+      >
+        <Avatar
+          userMetadata={GLOBLAL_CHAT_USER_DETAILS}
+          isGlobalChat
+          isUserList
+        />
+      </NavLink>
       {listOfLinks
         .filter((email) => email !== currentUser.user_metadata.email)
         .map((element) => (
@@ -40,7 +39,7 @@ function UserList({ listOfLinks, currentUser }: UserListProps) {
             to={`/chat/${element}`}
             className='user__list-item'
           >
-            {element}
+            {emailParser(element)}
           </NavLink>
         ))}
     </AsideContentWrapper>
