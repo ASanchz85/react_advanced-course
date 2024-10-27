@@ -28,20 +28,20 @@
 
 .avatar__image__container.image__container__userList {
   border: none;
-  color: var(--tertiary-color);
+  color: var(--primary-color);
   background-color: transparent;
 }
 
 .avatar__image {
   height: 70px;
   width: 70PX;
-  color: var(--tertiary-color);
+  color: var(--primary-color);
 }
 
 .avatar__image.avatar__userList {
   height: 50px;
   width: auto;
-  color: var(--tertiary-color);
+  color: var(--primary-color);
 }
 
 .avatar__details {

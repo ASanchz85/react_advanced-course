@@ -10,7 +10,7 @@
   padding: 1rem;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--tertiary-color);
+  background-color: var(--primary-color);
 }
 
 .icons__container {

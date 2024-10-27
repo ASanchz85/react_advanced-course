@@ -3,7 +3,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
-  background-color: var(--tertiary-color);
+  background-color: var(--primary-color);
 }
 
 .send__message_input__container form {
