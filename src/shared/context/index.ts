@@ -1,3 +1,4 @@
 import { AuthProvider } from './AuthContext'
+import { ThemeProvider } from './ThemeContext'
 
-export { AuthProvider }
+export { AuthProvider, ThemeProvider }

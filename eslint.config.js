@@ -29,16 +29,15 @@ export default [
         }
       ],
       semi: ['error', 'never'],
-      'no-unused-vars': [
+      '@typescript-eslint/no-unused-vars': [
         'error',
         {
           vars: 'all',
           args: 'after-used',
-          ignoreRestSiblings: true,
-          argsIgnorePattern: '^_'
+          ignoreRestSiblings: true
         }
       ],
-      'no-redeclare': 'error',
+      '@typescript-eslint/no-redeclare': 'error',
       eqeqeq: ['error', 'always'],
       'comma-dangle': ['error', 'never'],
       'space-before-function-paren': [

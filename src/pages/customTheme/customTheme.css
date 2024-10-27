@@ -1,0 +1,40 @@
+.custom__theme__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.custom__colors__pickers {
+  display: flex;
+  justify-content: space-evenly;
+  width: 60%;
+}
+
+.custom__colors__pickers label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.custom__colors__pickers input {
+  width: 100%;
+  max-width: 100px;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.preview__container {
+  overflow: hidden;
+  border: 0.5rem solid var(--quaternary-color);
+  border-radius: 0.5rem;
+}
+
+.preview__container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

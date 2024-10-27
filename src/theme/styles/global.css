@@ -14,16 +14,12 @@
 
   /* variables-colors */
   --primary-color: #d0d9e1;
-  /* --primary-color: #b0c4d8; */
   --secondary-color: #233751;
   --tertiary-color: #b0c4d8;
-  /* --tertiary-color: #d0d9e1; */
   --quaternary-color: #f5f5f5;
 
   --primary-color-rgb: 21, 22, 23;
-  /* --primary-color-rgb: 176, 196, 216; */
   --secondary-color-rgb: 35, 55, 81;
-  /* --tertiary-color-rgb: 21, 22, 23; */
   --tertiary-color-rgb: 176, 196, 216;
   --quaternary-color-rgb: 245, 245, 245;
 }
