@@ -19,30 +19,36 @@ function NterHelp() {
     setStepIndex((prev) => prev + moveIndex)
   }
 
+  const handleStepClick = (index: number) => {
+    setStepIndex(index)
+  }
+
   return (
     <MainWrapper
-      asideContent={<GuideLinks />}
+      asideContent={
+        <GuideLinks
+          dataList={howTo.map((step) => step.title)}
+          currentIndex={stepIndex}
+          onStepClick={handleStepClick}
+        />
+      }
       headerDetails={
         <TitleHeader
           title={howTo[stepIndex].title.split(':')[1]}
           index={stepIndex}
+          onStepPosition={handleStepPosition}
         />
       }
       mainContent={
         <>
           <ContentWrapper>
-            {howTo.map((step, index) => (
-              <DataCard
-                key={index}
-                explanationData={step}
-              />
-            ))}
+            <DataCard explanationData={howTo[stepIndex]} />
           </ContentWrapper>
           <Footer>
             <div className='footer__advice_container'>
               <p className='footer__advice_text'>
-                If you have some doubts while setting this part up, drop a line to{' '}
-                <b>antonio.sanchez@nter.es</b>
+                If you have some doubts while setting this part up, drop a line
+                to <b>antonio.sanchez@nter.es</b>
               </p>
             </div>
           </Footer>

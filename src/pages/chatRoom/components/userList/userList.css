@@ -20,16 +20,3 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
-
-.user__list::-webkit-scrollbar-track {
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-}
-
-.user__list::-webkit-scrollbar-thumb {
-  background-color: var(--tertiary-color);
-}
-
-.user__list::-webkit-scrollbar {
-  width: 0.6rem;
-}

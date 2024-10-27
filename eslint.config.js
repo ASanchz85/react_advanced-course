@@ -23,12 +23,20 @@ export default [
       quotes: [
         'error',
         'single',
-        { avoidEscape: true, allowTemplateLiterals: true }
+        {
+          avoidEscape: true,
+          allowTemplateLiterals: true
+        }
       ],
       semi: ['error', 'never'],
       'no-unused-vars': [
         'error',
-        { vars: 'all', args: 'after-used', ignoreRestSiblings: true }
+        {
+          vars: 'all',
+          args: 'after-used',
+          ignoreRestSiblings: true,
+          argsIgnorePattern: '^_'
+        }
       ],
       'no-redeclare': 'error',
       eqeqeq: ['error', 'always'],

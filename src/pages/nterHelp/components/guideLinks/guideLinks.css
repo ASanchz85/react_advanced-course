@@ -1,0 +1,24 @@
+.list-item {
+  display: flex;
+  flex-direction: column;
+
+
+  /* height: 60px; */
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  color: var(--tertiary-color);
+  transition: all 0.3s ease-in-out;
+}
+
+.list-item.active {
+  background-color: rgba(var(--tertiary-color-rgb), 0.2);
+}
+
+.list-item:hover {
+  background-color: rgba(var(--tertiary-color-rgb), 0.2);
+  color: var(--quaternary-color);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}

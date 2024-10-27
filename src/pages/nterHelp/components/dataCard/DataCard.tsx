@@ -12,7 +12,7 @@ function DataCard({ explanationData }: DataCardProps) {
 
   return (
     <div className='data__content'>
-      <h4 id={`#${title}`}>{title}</h4>
+      <h4>{title}</h4>
       <p>{content}</p>
     </div>
   )
