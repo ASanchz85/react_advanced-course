@@ -1,0 +1,11 @@
+.header__content {
+  display: flex;
+  min-height: 120px;
+  width: 100%;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+}

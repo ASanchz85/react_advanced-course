@@ -1,6 +1,7 @@
-import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
-import { IoCall, IoVideocam } from 'react-icons/io5'
 import { Avatar } from '../../../../shared/components'
+import { Header } from '../../../../theme/layout/components'
+import { IoCall, IoVideocam } from 'react-icons/io5'
+import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
 import { isNterEmail } from '../../../../shared/utils/emailHandler'
 import { IMAGES } from '../../../../shared/config/constants'
 import type { ChatUser } from '../../../../shared/types/user'
@@ -19,22 +20,20 @@ function RoomDetails({ userData }: RoomDetailsProps) {
   }
 
   return (
-    <header className='details__header'>
-      <div className='active_user__content'>
-        <Avatar userMetadata={userData.user_metadata} />
-        <div className='icons__container'>
-          <span className='icons_item'>
-            <IoCall />
-          </span>
-          <span className='icons_item'>
-            <IoVideocam />
-          </span>
-          <span className='icons_item'>
-            <PiDotsThreeOutlineVerticalFill />
-          </span>
-        </div>
+    <Header>
+      <Avatar userMetadata={userData.user_metadata} />
+      <div className='icons__container'>
+        <span className='icons_item'>
+          <IoCall />
+        </span>
+        <span className='icons_item'>
+          <IoVideocam />
+        </span>
+        <span className='icons_item'>
+          <PiDotsThreeOutlineVerticalFill />
+        </span>
       </div>
-    </header>
+    </Header>
   )
 }
 

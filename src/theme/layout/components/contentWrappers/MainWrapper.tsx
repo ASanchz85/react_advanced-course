@@ -1,17 +1,17 @@
 import { ReactNode } from 'react'
-import './contentWrappers.css'
+import './wrappers.css'
 
-interface ContentAreaWrapperProps {
+interface MainWrapperProps {
   asideContent: ReactNode
   headerDetails: ReactNode
   mainContent: ReactNode
 }
 
-function ContentAreaWrapper({
+function MainWrapper({
   asideContent,
   headerDetails,
   mainContent
-}: ContentAreaWrapperProps) {
+}: MainWrapperProps) {
   return (
     <section className='main__container'>
       <div className='main__content__wrapper'>
@@ -25,4 +25,4 @@ function ContentAreaWrapper({
   )
 }
 
-export default ContentAreaWrapper
+export default MainWrapper

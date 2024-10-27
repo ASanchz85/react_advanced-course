@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import './contentWrappers.css'
+import './wrappers.css'
 
 interface AsideContentWrapperProps {
   title: string

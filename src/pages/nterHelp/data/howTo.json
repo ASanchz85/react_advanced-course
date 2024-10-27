@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Step 1: Set Up Supabase Account",
+    "content": "Go to https://supabase.io and sign up for a new account. Once signed in, create a new project and select a region for your database. Supabase will automatically create a PostgreSQL database for you."
+  },
+  {
+    "title": "Step 2: Create a Table for Messages",
+    "content": "In your Supabase dashboard, navigate to the 'Database' tab. Go to the 'Tables' section and create a new table named 'messages'. Add columns such as 'id' (UUID, primary key), 'email_sender' (text), 'email_receiver' (text), and 'message' (text). Optionally, add a 'timestamp' column (timestamptz) to store when the message was sent."
+  },
+  {
+    "title": "Step 3: Set Permissions for the Messages Table",
+    "content": "In the Supabase dashboard, go to the 'Auth' tab and select 'Policies'. Click on the 'messages' table and create a new policy for each action (Insert, Select, Update, Delete). For basic chat functionality, allow all authenticated users to insert and select messages. Ensure that only users who are either the sender or receiver can see specific messages."
+  },
+  {
+    "title": "Step 4: Enable Realtime Functionality",
+    "content": "To allow your chat application to receive real-time updates, go to the 'Database' tab and find the 'Replication' section. Enable the 'Realtime' feature for the 'messages' table. This will allow your application to listen for changes in the table, such as new messages being added."
+  },
+  {
+    "title": "Step 5: Set Up Supabase Authentication",
+    "content": "Navigate to the 'Auth' tab in your Supabase dashboard and choose 'Providers'. Enable 'Google' as a provider. You will need to configure this by providing your Google Client ID and Client Secret, which you will obtain from the Google Cloud Console."
+  },
+  {
+    "title": "Step 6: Configure Google Cloud Console for OAuth",
+    "content": "Go to https://console.cloud.google.com and create a new project. Navigate to 'APIs & Services' > 'Credentials' and create an OAuth 2.0 Client ID. Set the application type as 'Web application' and provide the authorized redirect URIs (from your Supabase dashboard). Copy the Client ID and Client Secret and paste them back into your Supabase dashboard under the Google provider settings."
+  },
+  {
+    "title": "Step 7: Connect the Frontend to Supabase",
+    "content": "Install the Supabase client in your frontend project by running 'npm install @supabase/supabase-js'. Initialize the Supabase client with your Supabase URL and anon public key. Use the authentication methods provided by Supabase to allow users to log in via Google."
+  },
+  {
+    "title": "Step 8: Fetch and Send Messages",
+    "content": "Use Supabase's JavaScript library to fetch messages from the 'messages' table. Set up a function to insert new messages into the table when a user sends a message. Use Supabase's realtime subscription feature to listen for new messages and update the chat in real time."
+  },
+  {
+    "title": "Step 9: Deploy Your Application",
+    "content": "Once your application is ready, deploy it using a service like Vercel, Netlify, or another preferred hosting platform. Make sure your environment variables for Supabase URL and anon key are properly set up in your hosting platform."
+  },
+  {
+    "title": "Step 10: Test Your Chat Application",
+    "content": "Test the chat functionality by signing in with different Google accounts and exchanging messages. Ensure that private messages are displayed correctly and that global messages are visible when no receiver is specified."
+  }
+]

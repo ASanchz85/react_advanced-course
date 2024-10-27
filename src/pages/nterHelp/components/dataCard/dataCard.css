@@ -1,0 +1,6 @@
+.data__content {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+}

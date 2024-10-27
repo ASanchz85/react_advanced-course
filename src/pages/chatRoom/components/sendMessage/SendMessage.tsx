@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react'
+import { Footer } from '../../../../theme/layout/components'
 import { TbSend2 } from 'react-icons/tb'
 import supabase from '../../../../shared/services/supabaseClient'
 import type { ChatUser } from '../../../../shared/types/user'
@@ -34,7 +35,7 @@ function SendMessage({ userData, targetUser }: SendMessageProps) {
   }
 
   return (
-    <section className='send__message_input__container'>
+    <Footer>
       <form onSubmit={handleSendMessage}>
         <input
           type='text'
@@ -51,7 +52,7 @@ function SendMessage({ userData, targetUser }: SendMessageProps) {
           <TbSend2 />
         </button>
       </form>
-    </section>
+    </Footer>
   )
 }
 

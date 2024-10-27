@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { ContentAreaWrapper } from '../../theme/layout/components'
+import { ContentWrapper, MainWrapper } from '../../theme/layout/components'
 import {
   RoomDetails,
   MessagesCard,
@@ -39,7 +39,7 @@ function ChatRoom() {
   return (
     <>
       {userInfo && (
-        <ContentAreaWrapper
+        <MainWrapper
           asideContent={
             <UserList
               listOfLinks={allUsers}
@@ -50,7 +50,7 @@ function ChatRoom() {
           mainContent={
             filteredMessages && (
               <>
-                <div className='messages__content'>
+                <ContentWrapper>
                   {filteredMessages.length > 0 ? (
                     <MessagesCard
                       messages={filteredMessages}
@@ -60,7 +60,7 @@ function ChatRoom() {
                     <NoMessagesYet />
                   )}
                   <div ref={scrollRef}></div>
-                </div>
+                </ContentWrapper>
                 <SendMessage
                   userData={userInfo}
                   targetUser={selectedUser}
