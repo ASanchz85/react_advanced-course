@@ -5,17 +5,18 @@ import {
 } from 'react-router-dom'
 import { ChatRoom, CustomTheme, Login, NterHelp } from '../../pages'
 import Layout from '../../theme/layout/Layout'
+import GuardRoute from './GuardRoute'
 
 const routes = createRoutesFromElements(
   <>
     <Route
       path='/'
-      element={<Layout />}
+      element={
+        <GuardRoute>
+          <Layout />
+        </GuardRoute>
+      }
     >
-      <Route
-        index
-        element={<Login />}
-      />
       <Route
         path='global-chat'
         element={<ChatRoom />}
@@ -33,6 +34,10 @@ const routes = createRoutesFromElements(
         element={<NterHelp />}
       />
     </Route>
+    <Route
+      path='/login'
+      element={<Login />}
+    />
   </>
 )
 
