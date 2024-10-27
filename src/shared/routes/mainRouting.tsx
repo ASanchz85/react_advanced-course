@@ -3,7 +3,7 @@ import {
   createRoutesFromElements,
   Route
 } from 'react-router-dom'
-import { ChatRoom, CustomTheme, Login, NterHelp, Profile } from '../../pages'
+import { ChatRoom, CustomTheme, Login, NterHelp } from '../../pages'
 import Layout from '../../theme/layout/Layout'
 
 const routes = createRoutesFromElements(
@@ -31,10 +31,6 @@ const routes = createRoutesFromElements(
       <Route
         path='nter-help'
         element={<NterHelp />}
-      />
-      <Route
-        path='profile'
-        element={<Profile />}
       />
     </Route>
   </>

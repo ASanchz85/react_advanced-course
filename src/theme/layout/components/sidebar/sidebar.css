@@ -1,0 +1,48 @@
+.sidebar__links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar__icons,
+.sidebar__help {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.sidebar__links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--primary-color);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar__links a.active {
+  background-color: rgba(var(--tertiary-color-rgb), 0.2);
+}
+
+.sidebar__links a:hover {
+  background-color: rgba(var(--tertiary-color-rgb), 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar__links a svg {
+  width: 2rem;
+  height: auto;
+}
+
+.sidebar__links a .theme__icon {
+  height: 1.7rem;
+  width: 1.7rem;
+}

@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom'
 import { FaPalette } from 'react-icons/fa'
-import { IoSettings } from 'react-icons/io5'
 import { IoHelpCircleSharp } from 'react-icons/io5'
 import { PiChatsCircleFill } from 'react-icons/pi'
 import { IoLogOut } from 'react-icons/io5'
 import supabase from '../../../../shared/services/supabaseClient'
+import './sidebar.css'
 
 function Sidebar() {
   const handleLogOut = async () => {
@@ -44,18 +44,6 @@ function Sidebar() {
         >
           <PiChatsCircleFill />
         </NavLink>
-        <NavLink
-          to='/theme'
-          title='Edit theme'
-        >
-          <FaPalette />
-        </NavLink>
-        <NavLink
-          to='/profile'
-          title='Edit profile'
-        >
-          <IoSettings />
-        </NavLink>
       </div>
       <div className='sidebar__help'>
         <NavLink
@@ -63,6 +51,12 @@ function Sidebar() {
           title='NTER help'
         >
           <IoHelpCircleSharp />
+        </NavLink>
+        <NavLink
+          to='/theme'
+          title='Edit theme'
+        >
+          <FaPalette className='theme__icon' />
         </NavLink>
         <NavLink
           to='/'
