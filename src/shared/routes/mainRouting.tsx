@@ -1,6 +1,7 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route
 } from 'react-router-dom'
 import { ChatRoom, CustomTheme, Login, NterHelp } from '../../pages'
@@ -13,10 +14,6 @@ const routes = createRoutesFromElements(
       path='/login'
       element={<Login />}
     />
-    {/* <Route
-      path='/'
-      element={<Layout />}
-    > */}
     <Route
       path='/'
       element={
@@ -25,6 +22,15 @@ const routes = createRoutesFromElements(
         </GuardRoute>
       }
     >
+      <Route
+        index
+        element={
+          <Navigate
+            to='global-chat'
+            replace
+          />
+        }
+      />
       <Route
         path='global-chat'
         element={<ChatRoom />}

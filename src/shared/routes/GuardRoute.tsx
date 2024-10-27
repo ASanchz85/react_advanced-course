@@ -15,7 +15,6 @@ const GuardRoute = ({ children }: GuardRouteProps) => {
   if (!session) {
     return (
       <Navigate
-        // to='/'
         to='/login'
         replace
       />
