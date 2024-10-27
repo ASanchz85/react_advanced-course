@@ -6,7 +6,11 @@ interface GuardRouteProps {
 }
 
 const GuardRoute = ({ children }: GuardRouteProps) => {
-  const { session } = useAuth()
+  const { session, loading } = useAuth()
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
 
   if (!session) {
     return (

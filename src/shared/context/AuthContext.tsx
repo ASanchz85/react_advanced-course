@@ -8,6 +8,7 @@ interface AuthContextType {
   session: Session | null
   userInfo: ChatUser | null
   activeUser: string
+  loading: boolean
   handleLogin: () => Promise<void>
   handleLogout: () => Promise<void>
 }
@@ -15,14 +16,13 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const { session, userInfo, activeUser } = useSession()
+  const { session, userInfo, activeUser, loading } = useSession()
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut()
 
     if (error) {
-      console.error('Error logging out:', error.message)
-      return
+      throw new Error(error.message || 'Error logging out')
     }
 
     window.location.reload()
@@ -49,7 +49,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ session, userInfo, activeUser, handleLogin, handleLogout }}
+      value={{
+        session,
+        userInfo,
+        activeUser,
+        loading,
+        handleLogin,
+        handleLogout
+      }}
     >
       {children}
     </AuthContext.Provider>

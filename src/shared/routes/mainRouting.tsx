@@ -10,6 +10,14 @@ import GuardRoute from './GuardRoute'
 const routes = createRoutesFromElements(
   <>
     <Route
+      path='/login'
+      element={<Login />}
+    />
+    {/* <Route
+      path='/'
+      element={<Layout />}
+    > */}
+    <Route
       path='/'
       element={
         <GuardRoute>
@@ -34,10 +42,6 @@ const routes = createRoutesFromElements(
         element={<NterHelp />}
       />
     </Route>
-    <Route
-      path='/login'
-      element={<Login />}
-    />
   </>
 )
 

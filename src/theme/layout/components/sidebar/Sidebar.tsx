@@ -1,36 +1,13 @@
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../../../../shared/context/AuthContext'
 import { FaPalette } from 'react-icons/fa'
 import { IoHelpCircleSharp } from 'react-icons/io5'
 import { PiChatsCircleFill } from 'react-icons/pi'
 import { IoLogOut } from 'react-icons/io5'
-import supabase from '../../../../shared/services/supabaseClient'
 import './sidebar.css'
 
 function Sidebar() {
-  const handleLogOut = async () => {
-    const { error } = await supabase.auth.signOut()
-
-    if (error) {
-      console.log('Error logging out:', error.message)
-      return
-    }
-
-    const {
-      data: { session }
-    } = await supabase.auth.getSession()
-
-    if (session?.user?.email) {
-      await supabase
-        .from('online_users')
-        .update({
-          status: 'offline',
-          last_seen: new Date().toISOString()
-        })
-        .eq('user_email', session.user.email)
-    }
-
-    // window.location.reload()
-  }
+  const { handleLogout } = useAuth()
 
   return (
     <div className='sidebar__links'>
@@ -61,7 +38,7 @@ function Sidebar() {
         <NavLink
           to='/'
           title='Logout'
-          onClick={handleLogOut}
+          onClick={handleLogout}
         >
           <IoLogOut />
         </NavLink>

@@ -7,6 +7,7 @@ export const useSession = () => {
   const [session, setSession] = useState<Session | null>(null)
   const [userInfo, setUserInfo] = useState<ChatUser | null>(null)
   const [activeUser, setActiveUser] = useState('')
+  const [loading, setLoading] = useState(true)
 
   const getSession = async () => {
     try {
@@ -31,6 +32,8 @@ export const useSession = () => {
       if (error instanceof Error) {
         console.error('[ERROR]:', error.message)
       }
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -38,5 +41,5 @@ export const useSession = () => {
     getSession()
   }, [])
 
-  return { session, userInfo, activeUser }
+  return { session, userInfo, activeUser, loading }
 }
