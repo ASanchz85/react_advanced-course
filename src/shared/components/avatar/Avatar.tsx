@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { IoPersonCircle } from 'react-icons/io5'
 import { emailParser } from '../../utils/emailHandler'
 import type { UserChatMetadata } from '../../types/user'
@@ -16,6 +17,8 @@ function Avatar({
   isGlobalChat = false,
   isUserList = false
 }: AvatarProps) {
+  const [imgError, setImgError] = useState(false)
+
   return (
     <>
       {userMetadata && (
@@ -27,14 +30,12 @@ function Avatar({
               isUserList && 'image__container__userList'
             }`}
           >
-            {userMetadata.avatar_url ? (
+            {userMetadata.avatar_url && !imgError ? (
               <img
                 src={userMetadata.avatar_url}
                 alt={userMetadata.full_name}
                 className={`avatar__image ${isUserList && 'avatar__userList'}`}
-                // onError={(e) => {
-                //   e.currentTarget.src = 'https://i.imgur.com'
-                // }}
+                onError={() => setImgError(true)}
               />
             ) : (
               <IoPersonCircle

@@ -35,7 +35,7 @@
 .avatar__image {
   height: 70px;
   width: 70PX;
-  color: var(--secondary-color);
+  color: var(--tertiary-color);
 }
 
 .avatar__image.avatar__userList {
