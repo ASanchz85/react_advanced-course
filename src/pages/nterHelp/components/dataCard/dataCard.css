@@ -4,3 +4,8 @@
   margin-bottom: 1rem;
   color: var(--secondary-color);
 }
+
+.data__content p {
+  padding: 3rem;
+  line-height: 2;
+}
