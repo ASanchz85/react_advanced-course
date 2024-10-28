@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { AsideContentWrapper } from '../../../../theme/layout/components'
 import { Avatar, SearchBar } from '../../../../shared/components'
@@ -17,10 +18,21 @@ interface UserListProps {
 
 function UserList({ listOfLinks, currentUser }: UserListProps) {
   const title = isChatInPath() ? 'Chats' : findTitleViewByPath()
+  const [filteredUsers, setFilteredUsers] = useState(listOfLinks)
+
+  const handleFilteredUsers = (query: string) => {
+    if (query) {
+      const result = listOfLinks.filter((email) =>
+        email.toLowerCase().includes(query.toLowerCase()))
+      setFilteredUsers(result)
+    } else {
+      setFilteredUsers(listOfLinks)
+    }
+  }
 
   return (
     <AsideContentWrapper title={title}>
-      <SearchBar />
+      <SearchBar handleFilteredUsers={handleFilteredUsers} />
       <NavLink
         to={'/global-chat'}
         className='user__list-item'
@@ -31,7 +43,7 @@ function UserList({ listOfLinks, currentUser }: UserListProps) {
           isUserList
         />
       </NavLink>
-      {listOfLinks
+      {filteredUsers
         .filter((email) => email !== currentUser.user_metadata.email)
         .map((element) => (
           <NavLink

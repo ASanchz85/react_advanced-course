@@ -1,9 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import useDebounce from '../../hooks/useDebounce'
 import { FaSearch } from 'react-icons/fa'
+import { DEBOUNCE_DELAY } from '../../config/constants'
 import './searchBar.css'
 
-function SearchBar() {
+interface SearchBarProps {
+  handleFilteredUsers: (query: string) => void
+}
+
+function SearchBar({ handleFilteredUsers }: SearchBarProps) {
   const [query, setQuery] = useState('')
+  const debouncedQuery = useDebounce(query.trim(), DEBOUNCE_DELAY)
+
+  useEffect(() => {
+    handleFilteredUsers(debouncedQuery)
+  }, [debouncedQuery, handleFilteredUsers])
 
   return (
     <div className='search-bar__container'>

@@ -29,3 +29,5 @@ export const COLOR_CSS_VAR_NAMES = {
   TERTIARY_RGB: '--tertiary-color-rgb',
   QUATERNARY_RGB: '--quaternary-color-rgb'
 }
+
+export const DEBOUNCE_DELAY = 300
