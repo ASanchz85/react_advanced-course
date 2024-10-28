@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { AsideContentWrapper } from '../../../../theme/layout/components'
 import { Avatar, SearchBar } from '../../../../shared/components'
@@ -28,6 +28,10 @@ function UserList({ listOfLinks, currentUser }: UserListProps) {
       setFilteredUsers(listOfLinks)
     }
   }
+
+  useEffect(() => {
+    setFilteredUsers(listOfLinks)
+  }, [listOfLinks])
 
   return (
     <AsideContentWrapper title={title}>

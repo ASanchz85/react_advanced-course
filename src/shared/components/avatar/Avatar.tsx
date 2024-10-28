@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { IoPersonSharp } from 'react-icons/io5'
 import { emailParser } from '../../utils/emailHandler'
 import { getFirstTwoLetters } from '../../utils/stringHandler'
 import type { UserChatMetadata } from '../../types/user'
@@ -35,7 +36,7 @@ function Avatar({
             className={`avatar__image ${isUserList && 'avatar__userList'}`}
             onError={() => setImgError(true)}
           />
-        ) : (
+        ) : email ? (
           <div
             className={`avatar__initials__image ${
               isUserList && 'avatar__userList'
@@ -43,6 +44,10 @@ function Avatar({
           >
             <p>{getFirstTwoLetters(email)}</p>
           </div>
+        ) : (
+          <IoPersonSharp
+            className={`avatar__image ${isUserList && 'avatar__userList'}`}
+          />
         )}
       </div>
       <div

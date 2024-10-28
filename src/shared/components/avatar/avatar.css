@@ -51,10 +51,12 @@
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
+  font-weight: bold;
   border: 0.2rem solid var(--tertiary-color);
-  background-color: var(--secondary-color);
-  color: var(--tertiary-color);
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
   border-radius: 50%;
+  margin-left: 0.1rem;
 }
 
 .avatar__initials__image p {
