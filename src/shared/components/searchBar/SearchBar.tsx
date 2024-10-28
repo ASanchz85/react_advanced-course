@@ -14,7 +14,7 @@ function SearchBar({ handleFilteredUsers }: SearchBarProps) {
 
   useEffect(() => {
     handleFilteredUsers(debouncedQuery)
-  }, [debouncedQuery, handleFilteredUsers])
+  }, [debouncedQuery])
 
   return (
     <div className='search-bar__container'>

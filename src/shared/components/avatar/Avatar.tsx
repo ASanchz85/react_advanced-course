@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { IoPersonCircle } from 'react-icons/io5'
 import { emailParser } from '../../utils/emailHandler'
+import { getFirstTwoLetters } from '../../utils/stringHandler'
 import type { UserChatMetadata } from '../../types/user'
 import './avatar.css'
 
 interface AvatarProps {
-  userMetadata: UserChatMetadata
+  userMetadata?: UserChatMetadata
+  email?: string
   userLastMessage?: string
   isGlobalChat?: boolean
   isUserList?: boolean
@@ -13,6 +14,7 @@ interface AvatarProps {
 
 function Avatar({
   userMetadata,
+  email = '',
   userLastMessage = 'online',
   isGlobalChat = false,
   isUserList = false
@@ -20,42 +22,44 @@ function Avatar({
   const [imgError, setImgError] = useState(false)
 
   return (
-    <>
-      {userMetadata && (
-        <div
-          className={`avatar__container ${isUserList && 'container__userList'}`}
-        >
+    <div className={`avatar__container ${isUserList && 'container__userList'}`}>
+      <div
+        className={`avatar__image__container ${
+          isUserList && 'image__container__userList'
+        }`}
+      >
+        {userMetadata?.avatar_url && !imgError ? (
+          <img
+            src={userMetadata.avatar_url}
+            alt={userMetadata.full_name}
+            className={`avatar__image ${isUserList && 'avatar__userList'}`}
+            onError={() => setImgError(true)}
+          />
+        ) : (
           <div
-            className={`avatar__image__container ${
-              isUserList && 'image__container__userList'
+            className={`avatar__initials__image ${
+              isUserList && 'avatar__userList'
             }`}
           >
-            {userMetadata.avatar_url && !imgError ? (
-              <img
-                src={userMetadata.avatar_url}
-                alt={userMetadata.full_name}
-                className={`avatar__image ${isUserList && 'avatar__userList'}`}
-                onError={() => setImgError(true)}
-              />
-            ) : (
-              <IoPersonCircle
-                className={`avatar__image ${isUserList && 'avatar__userList'}`}
-              />
-            )}
+            <p>{getFirstTwoLetters(email)}</p>
           </div>
-          <div
-            className={`avatar__details ${
-              isUserList && 'avatar_details__userList'
-            }`}
-          >
-            <p>
-              {isGlobalChat ? 'Global Chat' : emailParser(userMetadata.email)}
-            </p>
-            <p>{isGlobalChat ? '' : userLastMessage}</p>
-          </div>
-        </div>
-      )}
-    </>
+        )}
+      </div>
+      <div
+        className={`avatar__details ${
+          isUserList && 'avatar_details__userList'
+        }`}
+      >
+        {(userMetadata || email) && (
+          <p>
+            {isGlobalChat
+              ? 'Global Chat'
+              : emailParser(userMetadata?.email || email)}
+          </p>
+        )}
+        {!email && <p>{isGlobalChat ? '' : userLastMessage}</p>}
+      </div>
+    </div>
   )
 }
 

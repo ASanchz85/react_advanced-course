@@ -6,7 +6,6 @@ import {
   findTitleViewByPath,
   isChatInPath
 } from '../../../../shared/utils/pathHandler'
-import { emailParser } from '../../../../shared/utils/emailHandler'
 import { GLOBLAL_CHAT_USER_DETAILS } from '../../../../shared/config/constants'
 import type { ChatUser } from '../../../../shared/types/user'
 import './userList.css'
@@ -51,7 +50,10 @@ function UserList({ listOfLinks, currentUser }: UserListProps) {
             to={`/chat/${element}`}
             className='user__list-item'
           >
-            {emailParser(element)}
+            <Avatar
+              email={element}
+              isUserList
+            />
           </NavLink>
         ))}
     </AsideContentWrapper>

@@ -34,7 +34,7 @@
 
 .avatar__image {
   height: 70px;
-  width: 70PX;
+  width: 70px;
   color: var(--primary-color);
 }
 
@@ -42,6 +42,23 @@
   height: 50px;
   width: auto;
   color: var(--primary-color);
+}
+
+.avatar__initials__image {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: 0.2rem solid var(--tertiary-color);
+  background-color: var(--secondary-color);
+  color: var(--tertiary-color);
+  border-radius: 50%;
+}
+
+.avatar__initials__image p {
+  transform: translateY(-0.1rem);
 }
 
 .avatar__details {

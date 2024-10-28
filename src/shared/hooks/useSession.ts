@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import supabase from '../services/supabaseClient'
+import { uploadProfilePicture, supabase } from '../services'
 import type { Session } from '@supabase/supabase-js'
 import type { ChatUser } from '../types/user'
 
@@ -28,6 +28,10 @@ export const useSession = () => {
       const { avatar_url, full_name, email } = data.session.user.user_metadata
       setUserInfo({ user_metadata: { avatar_url, full_name, email } })
       setActiveUser(email)
+
+      if (avatar_url) {
+        await uploadProfilePicture(email, avatar_url)
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.error('[ERROR]:', error.message)

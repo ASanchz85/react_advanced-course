@@ -3,6 +3,7 @@ import { useGlobalMessages } from './useGlobalMessages'
 import { usePrivateMessages } from './usePrivateMessages'
 import { useGetOnlineUsers } from './useGetOnlineUsers'
 import { useRegisteredUsers } from './useRegisteredUsers'
+import { useProfilePicture } from './useProfilePicture'
 import useDebounce from './useDebounce'
 
 export {
@@ -11,5 +12,6 @@ export {
   usePrivateMessages,
   useGetOnlineUsers,
   useRegisteredUsers,
+  useProfilePicture,
   useDebounce
 }
