@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { useToast } from '../context/ToastContext'
 import supabase from '../services/supabaseClient'
+import { ERROR_MESSAGES, TOAST_TYPES } from '../config/constants'
 import {
   TABLE_REALTIME_EVENTS,
   TABLE_SCHEMA,
@@ -10,6 +12,7 @@ import type { Message } from '../types/messages'
 
 export const useGlobalMessages = () => {
   const [messages, setMessages] = useState<Message[]>([])
+  const { addToast } = useToast()
 
   const getMessages = async () => {
     try {
@@ -24,7 +27,10 @@ export const useGlobalMessages = () => {
       setMessages(data)
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Error fetching messages:', error.message)
+        addToast({
+          message: error.message || ERROR_MESSAGES.CONNECTION,
+          type: TOAST_TYPES.ERROR
+        })
       }
     }
   }

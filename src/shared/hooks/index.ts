@@ -1,17 +1,13 @@
 import { useSession } from './useSession'
 import { useGlobalMessages } from './useGlobalMessages'
 import { usePrivateMessages } from './usePrivateMessages'
-import { useGetOnlineUsers } from './useGetOnlineUsers'
-import { useRegisteredUsers } from './useRegisteredUsers'
-import { useProfilePicture } from './useProfilePicture'
+import useResponsiveWidth from './useResponsiveWidth'
 import useDebounce from './useDebounce'
 
 export {
   useSession,
   useGlobalMessages,
   usePrivateMessages,
-  useGetOnlineUsers,
-  useRegisteredUsers,
-  useProfilePicture,
+  useResponsiveWidth,
   useDebounce
 }

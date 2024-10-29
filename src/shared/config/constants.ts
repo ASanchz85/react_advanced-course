@@ -31,3 +31,24 @@ export const COLOR_CSS_VAR_NAMES = {
 }
 
 export const DEBOUNCE_DELAY = 300
+
+export const ERROR_HEADER = '[ERROR]'
+
+export const ERROR_MESSAGES = {
+  DEFAULT: 'An unexpected error occurred',
+  LOGIN: 'Error logging in',
+  LOGOUT: 'Error logging out',
+  AUTH: 'User not authenticated',
+  SESSION: 'Not possible to validate session',
+  MESSAGE: 'Your message could not be sent',
+  CONNECTION: 'Connection with database failed'
+}
+
+export const TOAST_DURATION = 5000
+
+export const TOAST_TYPES = {
+  ERROR: 'error',
+  SUCCESS: 'success',
+  INFO: 'info',
+  WARNING: 'warning'
+} as const

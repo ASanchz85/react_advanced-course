@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react'
+import { COLOR_CSS_VAR_NAMES } from '../../../shared/config/constants'
+import useResponsiveWidth from '../../../shared/hooks/useResponsiveWidth'
 
 interface LivePreviewProps {
   primaryColor: string
@@ -14,7 +16,8 @@ const LivePreview = ({
   quaternaryColor
 }: LivePreviewProps) => {
   const iframeRef = useRef<HTMLIFrameElement>(null)
-  const widthIframe = 1200
+  const windowWidth = useResponsiveWidth()
+  const widthIframe = windowWidth * 0.8
 
   const updateIframeStyles = () => {
     if (iframeRef.current) {
@@ -22,19 +25,19 @@ const LivePreview = ({
 
       if (iframeDocument) {
         iframeDocument.documentElement.style.setProperty(
-          '--primary-color',
+          COLOR_CSS_VAR_NAMES.PRIMARY,
           primaryColor
         )
         iframeDocument.documentElement.style.setProperty(
-          '--secondary-color',
+          COLOR_CSS_VAR_NAMES.SECONDARY,
           secondaryColor
         )
         iframeDocument.documentElement.style.setProperty(
-          '--tertiary-color',
+          COLOR_CSS_VAR_NAMES.TERTIARY,
           tertiaryColor
         )
         iframeDocument.documentElement.style.setProperty(
-          '--quaternary-color',
+          COLOR_CSS_VAR_NAMES.QUATERNARY,
           quaternaryColor
         )
       }

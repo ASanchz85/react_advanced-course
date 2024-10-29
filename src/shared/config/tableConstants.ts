@@ -1,6 +1,5 @@
 export const TABLE_SQL_NAMES = {
-  MESSAGES: 'messages',
-  ONLINE_USERS: 'online_users'
+  MESSAGES: 'messages'
 }
 
 export const TABLE_SQL_QUERIES = {
@@ -25,16 +24,4 @@ export const TABLE_MESSAGE_FIELDS = {
   CONTENT: 'content' as const,
   CREATED_AT: 'created_at' as const,
   AVATAR_IMAGE: 'avatar_image' as const
-}
-
-export const TABLE_USER_FIELDS = {
-  ID: 'id' as const,
-  USER_EMAIL: 'user_email' as const,
-  STATUS: 'status' as const,
-  LAST_SEEN: 'last_seen' as const
-}
-
-export const TABLE_USER_STATUS = {
-  ONLINE: 'online' as const,
-  OFFLINE: 'offline' as const
 }

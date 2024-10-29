@@ -1,7 +1,13 @@
 import { FormEvent, useState } from 'react'
 import { Footer } from '../../../../theme/layout/components'
 import { TbSend2 } from 'react-icons/tb'
+import { useToast } from '../../../../shared/context/ToastContext'
 import supabase from '../../../../shared/services/supabaseClient'
+import { TABLE_SQL_NAMES } from '../../../../shared/config/tableConstants'
+import {
+  ERROR_MESSAGES,
+  TOAST_TYPES
+} from '../../../../shared/config/constants'
 import type { ChatUser } from '../../../../shared/types/user'
 import './sendMessage.css'
 
@@ -12,6 +18,7 @@ interface SendMessageProps {
 
 function SendMessage({ userData, targetUser }: SendMessageProps) {
   const [newMessage, setNewMessage] = useState('')
+  const { addToast } = useToast()
 
   const handleSendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -20,14 +27,17 @@ function SendMessage({ userData, targetUser }: SendMessageProps) {
       return
     }
 
-    const insertMessage = await supabase.from('messages').insert({
+    const insertMessage = await supabase.from(TABLE_SQL_NAMES.MESSAGES).insert({
       content: newMessage,
       email_sender: userData.user_metadata.email,
       email_receiver: targetUser || null
     })
 
     if (insertMessage.error) {
-      console.error('Error inserting message:', insertMessage.error.message)
+      addToast({
+        message: insertMessage.error.message || ERROR_MESSAGES.MESSAGE,
+        type: TOAST_TYPES.ERROR
+      })
       return
     }
 

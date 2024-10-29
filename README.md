@@ -80,7 +80,6 @@ The project has the minimal vite dependencies by default. Together with:
 
 - SupabaseJS
 - React-router-dom
-- Date-fns
 - React-icons
 
 ## Environment variables

@@ -1,6 +1,8 @@
 import { createContext, useContext, ReactNode } from 'react'
+import { useToast } from './ToastContext'
 import { useSession } from '../hooks/useSession'
 import supabase from '../services/supabaseClient'
+import { ERROR_HEADER, ERROR_MESSAGES, TOAST_TYPES } from '../config/constants'
 import type { ChatUser } from '../types/user'
 import type { Session } from '@supabase/supabase-js'
 
@@ -17,12 +19,17 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { session, userInfo, activeUser, loading } = useSession()
+  const { addToast } = useToast()
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut()
 
     if (error) {
-      throw new Error(error.message || 'Error logging out')
+      addToast({
+        message: error.message || ERROR_MESSAGES.LOGOUT,
+        type: TOAST_TYPES.ERROR
+      })
+      return
     }
 
     window.location.reload()
@@ -38,11 +45,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       })
 
       if (error) {
-        throw new Error(error.message || 'Error logging in')
+        throw new Error(error.message || ERROR_MESSAGES.LOGIN)
       }
     } catch (error) {
       if (error instanceof Error) {
-        console.error('[ERROR]:', error.message)
+        addToast({
+          message: `${ERROR_HEADER}: ${error.message}`,
+          type: TOAST_TYPES.ERROR
+        })
       }
     }
   }

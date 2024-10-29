@@ -4,10 +4,11 @@ import { FaPalette } from 'react-icons/fa'
 import { IoHelpCircleSharp } from 'react-icons/io5'
 import { PiChatsCircleFill } from 'react-icons/pi'
 import { IoLogOut } from 'react-icons/io5'
+import { isNterEmail } from '../../../../shared/utils/emailHandler'
 import './sidebar.css'
 
 function Sidebar() {
-  const { handleLogout } = useAuth()
+  const { handleLogout, activeUser } = useAuth()
 
   return (
     <div className='sidebar__links'>
@@ -23,12 +24,14 @@ function Sidebar() {
         </NavLink>
       </div>
       <div className='sidebar__help'>
-        <NavLink
-          to='/nter-help'
-          title='NTER help'
-        >
-          <IoHelpCircleSharp />
-        </NavLink>
+        {isNterEmail(activeUser) && (
+          <NavLink
+            to='/nter-help'
+            title='NTER help'
+          >
+            <IoHelpCircleSharp />
+          </NavLink>
+        )}
         <NavLink
           to='/theme'
           title='Edit theme'
