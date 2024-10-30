@@ -9,3 +9,9 @@
   padding: 3rem;
   line-height: 2;
 }
+
+.data__content img {
+  max-width: 900px;
+  margin-top: 1rem;
+  justify-items: center;
+}

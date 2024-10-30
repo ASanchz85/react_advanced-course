@@ -1,6 +1,6 @@
 # React Advanced Course + TypeScript + Vite
 
-This is the technical coding example to get the React Advanced certificate (15-10-2024).
+This is the technical coding example to get the React Advanced certificate (31-10-2024).
 
 The project has been set up using vite, typescript + swc and a custom eslint config file that follows the standardjs convention. You are free to change it and use whatever other rules you like more. You can take a look at them here:
 
@@ -9,7 +9,7 @@ The project has been set up using vite, typescript + swc and a custom eslint con
 - [Standardjs](https://standardjs.com/rules)
 - [XO](https://github.com/xojs/xo)
 
-There are many options out there, but the previous ones are the most common ones.
+There are many options out there, but the previous ones are the most common ones. Be aware that this is crutial step when collaborating in projects with others developers and should be chosen by consensus.
 
 ## ESLint configuration and plugins
 
