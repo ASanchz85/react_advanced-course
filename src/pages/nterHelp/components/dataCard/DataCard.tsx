@@ -3,7 +3,7 @@ import './dataCard.css'
 interface DataCardProps {
   explanationData: {
     content: string
-    image?: string
+    image?: string[]
   }
 }
 
@@ -13,12 +13,15 @@ function DataCard({ explanationData }: DataCardProps) {
   return (
     <div className='data__content'>
       <p>{content}</p>
-      {image && (
-        <img
-          src={image}
-          alt='data card'
-        />
-      )}
+      {image &&
+        image?.length > 0 &&
+        image.map((img) => (
+          <img
+            key={img}
+            src={`/${img}`}
+            alt='data card'
+          />
+        ))}
     </div>
   )
 }

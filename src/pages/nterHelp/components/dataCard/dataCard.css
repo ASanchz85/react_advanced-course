@@ -13,5 +13,5 @@
 .data__content img {
   max-width: 900px;
   margin-top: 1rem;
-  justify-items: center;
+  align-self: center;
 }

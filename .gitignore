@@ -1,4 +1,5 @@
 .env
+*.bak.*
 
 *.log
 npm-debug.log*
