@@ -2,7 +2,7 @@
 
 This is the technical coding example to get the React Advanced certificate (31-10-2024) at NTER. The goal is to show your skills while learning and having fun. So, the proposal is to create a serverless chat.
 
-Here you have an example of what you will build ->
+Here you have an example of what you will build -> [NCHAT](https://nter-chat.netlify.app/)
 
 The project has been set up using vite, typescript + swc and a custom eslint config file that follows the standardjs convention. You are free to change it and use whatever other rules you like more. You can take a look at them here:
 
@@ -102,6 +102,10 @@ For a small-medium project is a good option, but if you want to go ahead, consid
 ### Supabase config
 
 Visit the following link if you are logged in with your NTER account to get a thoroughly explanation of how to start using both, Supabase and Google Cloud Console for the 0Auth. Anyhow don't forget to google what you don't understand and follow the official docs in order to learn how to use their APIs, as well as, getting access to examples of how to implement them. RTFM.
+
+[Guide set supabase and google 0auth up](https://nter-chat.netlify.app/nter-help)
+
+If you can't get access to it, but you have access to the current repository, you can check as well the following markdown document: *HINTS.md*
 
 ## Execution commands
 
