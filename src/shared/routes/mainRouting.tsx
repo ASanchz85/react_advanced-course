@@ -48,6 +48,15 @@ const routes = createRoutesFromElements(
         element={<NterHelp />}
       />
     </Route>
+    <Route
+      path='*'
+      element={
+        <Navigate
+          to='/global-chat'
+          replace
+        />
+      }
+    />
   </>
 )
 
