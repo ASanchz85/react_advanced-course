@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode } from 'react'
+import { createContext, useContext, ReactNode, useEffect } from 'react'
 import { useToast } from './ToastContext'
 import { useSession } from '../hooks/useSession'
 import supabase from '../services/supabaseClient'
@@ -56,6 +56,29 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     }
   }
+
+  useEffect(() => {
+    const fragment = new URLSearchParams(location.hash.slice(1))
+    const accessToken = fragment.get('access_token')
+    const refreshToken = fragment.get('refresh_token')
+
+    if (accessToken && refreshToken) {
+      supabase.auth
+        .setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken
+        })
+        .then(() => {
+          window.location.replace('/global-chat')
+        })
+        .catch((error) => {
+          addToast({
+            message: `${ERROR_HEADER}: ${error.message}`,
+            type: TOAST_TYPES.ERROR
+          })
+        })
+    }
+  }, [location, addToast])
 
   return (
     <AuthContext.Provider
