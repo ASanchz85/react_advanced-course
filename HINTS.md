@@ -48,7 +48,13 @@ Use Supabase's JavaScript library to fetch messages from the 'messages' table. S
 
 ## Step 9: Deploy Your Application
 
-Once your application is ready, deploy it using a service like Vercel, Netlify, or another preferred hosting platform. Make sure your environment variables for Supabase URL and anon key are properly set up in your hosting platform.
+Once your application is ready, deploy it using a service like Vercel, Netlify, or another preferred hosting platform. Make sure your environment variables for Supabase URL and anon key are properly set up in your hosting platform. If you would like to follow same steps as me, using netlify to deploy your app. You should take into consideration that netlify will need an extra file placed in your '/dist' folder named '_redirects' to proper handler the routing of your SPA.
+
+In the '_redirects' file you have to add the following line in order to force the hosting to always send back to the main index.html file:
+
+```sh
+/*    /index.html   200
+```
 
 ## Step 10: Test Your Chat Application
 
